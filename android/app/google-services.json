@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1005280557923",
+    "project_id": "qdlibya-cd1de",
+    "storage_bucket": "qdlibya-cd1de.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1005280557923:android:4ce7f10f139f301dc07156",
+        "android_client_info": {
+          "package_name": "com.eslam.delivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1005280557923-rpb3n6eijlrfvo24n0ah0t7htlipk6lm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAeV4CBajscsK2R4ySenQIas7Bh2PLFumU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1005280557923-rpb3n6eijlrfvo24n0ah0t7htlipk6lm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
