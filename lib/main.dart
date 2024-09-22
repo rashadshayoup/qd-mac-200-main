@@ -25,7 +25,7 @@ import 'package:firebase_core/firebase_core.dart';
 // import 'package:firebase_core_dart/firebase_core_dart.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
-void main() async {
+void main() async { 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await GetStorage.init();

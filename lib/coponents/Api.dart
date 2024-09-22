@@ -1,14 +1,14 @@
 class api {
   // var url = "https://demo.qdlibya.com/";
   // var URLFrontend = "https://qdl-master.herokuapp.com/" ;
-  var url = "http://10.0.2.2:5108/";
+  var url = "http://10.101.120.68:8888/";
   var URLFrontend = "https://www.qdlibya.com/";
 
   var urlIcon = "assets/Qdly.png";
 
   var login = "api/Auth/SingIn?";
   // /// شاشة  اسعار التوصيل /////
-  var Branches = "api/mobile/GetMainBranches";
+  var Branches = "api/Branch/GetBranchs";
   var deliveryPrices = "api/mobile/GetCitiesByBranch?BranchId=";
   ///// شاشة قيد الإنتظار (الطلبيات) /////////
   var order = "api/mobile/GetWebOrders";

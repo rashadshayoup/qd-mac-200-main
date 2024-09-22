@@ -65,11 +65,8 @@ class _homePagessState extends State<homePagess> {
   // var fbm = FirebaseMessaging.instance;
   @override
   void initState() {
-    
     super.initState();
     noios();
-    
-
 
     // WidgetsFlutterBinding.ensureInitialized();
     // Firebase.initializeApp();
@@ -78,14 +75,13 @@ class _homePagessState extends State<homePagess> {
 //////////////////////
 
     // fbm.getToken().then((value) => {print(value)});
-    
+
     userId = _Storage.read("userId").toString();
 
     FirebaseMessaging.instance.subscribeToTopic(userId);
 
     // final iOS = IOSInitializationSettings();
     // final settings = InitializationSettings( iOS: iOS);
-
 
     // NotificationApi.notificationDetails();
     // NotificationApi.init();
@@ -120,8 +116,7 @@ class _homePagessState extends State<homePagess> {
                 ? null
                 : FloatingActionButton(
                     backgroundColor: Themes.light.primaryColor,
-                    child: Icon(Icons.add,
-                        color: _color == true ? Colors.white : Colors.white),
+                    child: Icon(Icons.add, color: _color == true ? Colors.white : Colors.white),
                     onPressed: () {
                       // Workmanager().registerOneOffTask("1","taskName", constraints: Constraints(networkType: NetworkType.connected));
 
@@ -130,8 +125,7 @@ class _homePagessState extends State<homePagess> {
                       });
                     },
                   ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.startFloat,
+            floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
             bottomNavigationBar: BottomAppBar(
               // color: _color ? Themes.dark_primary2 : Themes.light_white ,
               color: Themes.light_white,
@@ -162,18 +156,14 @@ class _homePagessState extends State<homePagess> {
                               children: [
                                 Icon(
                                   Icons.dashboard,
-                                  color: currentTab == 0
-                                      ? Themes.light.primaryColor
-                                      : Themes.light_grey,
+                                  color: currentTab == 0 ? Themes.light.primaryColor : Themes.light_grey,
                                 ),
                                 Text(
                                   "الطلبيات",
                                   style: GoogleFonts.cairo(
                                       textStyle: TextStyle(
                                     fontSize: _width < 321 ? 10 : 12,
-                                    fontWeight: currentTab == 0
-                                        ? FontWeight.bold
-                                        : FontWeight.normal,
+                                    fontWeight: currentTab == 0 ? FontWeight.bold : FontWeight.normal,
                                     color: Themes.light_grey,
                                   )),
                                 )
@@ -193,18 +183,14 @@ class _homePagessState extends State<homePagess> {
                               children: [
                                 Icon(
                                   Icons.account_balance_wallet,
-                                  color: currentTab == 1
-                                      ? Themes.light.primaryColor
-                                      : Colors.grey,
+                                  color: currentTab == 1 ? Themes.light.primaryColor : Colors.grey,
                                 ),
                                 Text(
                                   "المحفظة",
                                   style: GoogleFonts.cairo(
                                       textStyle: TextStyle(
                                     fontSize: _width < 321 ? 10 : 12,
-                                    fontWeight: currentTab == 1
-                                        ? FontWeight.bold
-                                        : FontWeight.normal,
+                                    fontWeight: currentTab == 1 ? FontWeight.bold : FontWeight.normal,
                                     color: Themes.light_grey,
                                   )),
                                 )
@@ -215,7 +201,7 @@ class _homePagessState extends State<homePagess> {
                             minWidth: 30,
                             onPressed: () {
                               setState(() {
-                                currenScreen = branches();
+                                currenScreen = deliveryPrices();
                                 currentTab = 2;
                               });
                             },
@@ -224,18 +210,14 @@ class _homePagessState extends State<homePagess> {
                               children: [
                                 Icon(
                                   Icons.delivery_dining_sharp,
-                                  color: currentTab == 2
-                                      ? Themes.light.primaryColor
-                                      : Colors.grey,
+                                  color: currentTab == 2 ? Themes.light.primaryColor : Colors.grey,
                                 ),
                                 Text(
                                   "اسعار التوصيل",
                                   style: GoogleFonts.cairo(
                                       textStyle: TextStyle(
                                     fontSize: _width < 321 ? 10 : 12,
-                                    fontWeight: currentTab == 2
-                                        ? FontWeight.bold
-                                        : FontWeight.normal,
+                                    fontWeight: currentTab == 2 ? FontWeight.bold : FontWeight.normal,
                                     color: Themes.light_grey,
                                   )),
                                 )
@@ -255,18 +237,14 @@ class _homePagessState extends State<homePagess> {
                               children: [
                                 Icon(
                                   Icons.settings,
-                                  color: currentTab == 3
-                                      ? Themes.light.primaryColor
-                                      : Colors.grey,
+                                  color: currentTab == 3 ? Themes.light.primaryColor : Colors.grey,
                                 ),
                                 Text(
                                   "الإعدادات",
                                   style: GoogleFonts.cairo(
                                       textStyle: TextStyle(
                                     fontSize: _width < 321 ? 10 : 12,
-                                    fontWeight: currentTab == 3
-                                        ? FontWeight.bold
-                                        : FontWeight.normal,
+                                    fontWeight: currentTab == 3 ? FontWeight.bold : FontWeight.normal,
                                     color: Themes.light_grey,
                                   )),
                                 )
@@ -346,7 +324,6 @@ class _homePagessState extends State<homePagess> {
           ],
         )
 
-
         // Icon(
         //   Icons.notifications,
         //   size: 25,
@@ -360,28 +337,24 @@ class _homePagessState extends State<homePagess> {
 
   PopupMenuItem _buildPopupMenuItem(String title, IconData iconData, value) {
     return PopupMenuItem(
-         value: value ,
-        child: Directionality(
-          textDirection: TextDirection.rtl,
-          child: Row(
-            children: [
-              Icon(
-                iconData,
-                color: Themes.dark_primary,
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Text(title,
-                  style: GoogleFonts.cairo(
-                      textStyle: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: Themes.light.primaryColor))),
-            ],
-          ),
+      value: value,
+      child: Directionality(
+        textDirection: TextDirection.rtl,
+        child: Row(
+          children: [
+            Icon(
+              iconData,
+              color: Themes.dark_primary,
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Text(title,
+                style: GoogleFonts.cairo(
+                    textStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Themes.light.primaryColor))),
+          ],
         ),
-     
+      ),
     );
   }
 
@@ -437,33 +410,30 @@ class _homePagessState extends State<homePagess> {
   //   });
   // }
 
-  Future<void> _firebaseMessagingBackgroundHandler(
-      RemoteMessage message) async {
+  Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
     await Firebase.initializeApp();
     print('Handling a background message ${message.messageId}');
   }
 
-  Future<void> noios ()async{
+  Future<void> noios() async {
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
 
-FirebaseMessaging messaging = FirebaseMessaging.instance;
+    NotificationSettings settings = await messaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
 
-NotificationSettings settings = await messaging.requestPermission(
-  alert: true,
-  announcement: false,
-  badge: true,
-  carPlay: false,
-  criticalAlert: false,
-  provisional: false,
-  sound: true,
-);
-
-if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-  print('User granted permission');
-} else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
-  print('User granted provisional permission');
-} else {
-  print('User declined or has not accepted permission');
-}
-
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      print('User granted permission');
+    } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
+      print('User granted provisional permission');
+    } else {
+      print('User declined or has not accepted permission');
+    }
   }
 }
