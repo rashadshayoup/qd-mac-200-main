@@ -25,11 +25,11 @@ class _createAccountState extends State<createAccount> {
   var _value = false;
   final _Storage = GetStorage();
   var _color = true;
-  List<dynamic> branche = [];
-  var fromBranchID = "";
-  var fromBranchName = "";
-  bool visible_branch_lodding = true;
-  bool visible_branch = false;
+  // // List<dynamic> branche = [];
+  // // var fromBranchID = "";
+  // // var fromBranchName = "";
+  // bool visible_branch_lodding = true;
+  // bool visible_branch = false;
   bool visible_login = true;
   bool visible_ = false;
   var token = "";
@@ -42,13 +42,13 @@ class _createAccountState extends State<createAccount> {
   var password = TextEditingController();
   var passwordHash = TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
-    _color = _Storage.read("isDarkMode");
-    // token = _Storage.read("token");
-    Branches();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _color = _Storage.read("isDarkMode");
+  //   // token = _Storage.read("token");
+  //   Branches();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -65,10 +65,10 @@ class _createAccountState extends State<createAccount> {
                 borderRadius:
                     BorderRadius.only(bottomLeft: Radius.circular(90)),
                 color: Themes.light.primaryColor,
-                // gradient: LinearGradient(colors: [
-                //   (Color.fromARGB(255, 85, 51, 117)),
-                //   (Color.fromARGB(255, 118, 82, 153))
-                // ], begin: Alignment.topCenter, end: Alignment.bottomCenter)
+                gradient: LinearGradient(colors: [
+                  (Color.fromARGB(255, 85, 51, 117)),
+                  (Color.fromARGB(255, 118, 82, 153))
+                ], begin: Alignment.topCenter, end: Alignment.bottomCenter)
               ),
               child: Center(
                   child: Column(
@@ -97,89 +97,89 @@ class _createAccountState extends State<createAccount> {
 
             /////// ------------ DropdownSearch branch ------------ ////////
 
-            Visibility(
-                visible: visible_branch_lodding,
-                child: Container(
-                  margin: EdgeInsets.only(top: 20),
-                  child: Center(
-                      child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                        Themes.light.primaryColor),
-                  )),
-                )),
+            // Visibility(
+            //     visible: visible_branch_lodding,
+            //     child: Container(
+            //       margin: EdgeInsets.only(top: 20),
+            //       child: Center(
+            //           child: CircularProgressIndicator(
+            //         valueColor: AlwaysStoppedAnimation<Color>(
+            //             Themes.light.primaryColor),
+            //       )),
+            //     )),
 
-            Visibility(
-              visible: visible_branch,
-              child: Container(
-                margin: EdgeInsets.only(left: 20, right: 20, top: 70),
-                padding: EdgeInsets.only(left: 20, right: 5),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  color: Colors.grey[200],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      height: 52,
-                      // margin: EdgeInsets.only(top: 4.0),
-                      padding: EdgeInsets.only(right: 20),
-                      // decoration: BoxDecoration(
-                      //     color:
-                      //         _color ? Themes.dark_primary : Colors.grey[300],
-                      //     border: Border.all(
-                      //         color: _color
-                      //             ? Themes.dark_white
-                      //             : Themes.light.primaryColor,
-                      //         width: 1.0),
-                      //     borderRadius: BorderRadius.circular(5)),
-                      child: Row(children: [
-                        Expanded(
-                          child: DropdownSearch<String>(
-
-
-                            
-
-                            // autoFocusSearchBox: true,
-
-
-
-
-
-
-                            enabled: true,
-                            popupProps: PopupProps.dialog(),
-
-
-                            // popupProps: PopupProps.dialog(),
-                            //to show search box
-                            // enabled: true,
-                            //list of dropdown items
-                            //  dropdownBuilder: _style,
-                            dropdownBuilder: _customDropDownAddress,
-                            items: List<String>.from(
-                                branche.map((e) => e['name'])),
-                            // label: "Country",
-                            onChanged: (value) {
-                              for (var i = 0; i < branche.length; i++) {
-                                if (branche[i]['name'] == value) {
-                                  this.fromBranchID = branche[i]['id'];
-                                  // this.fromBranchName = branche[i]['name'];
-                                }
-                              }
-                            },
-
-                            //show selected item
-                            selectedItem: this.fromBranchName,
-                            // hint: "لال",
-                          ),
-                        ),
-                      ]),
-                    )
-                  ],
-                ),
-              ),
-            ),
+            // Visibility(
+            //   visible: visible_branch,
+            //   child: Container(
+            //     margin: EdgeInsets.only(left: 20, right: 20, top: 70),
+            //     padding: EdgeInsets.only(left: 20, right: 5),
+            //     decoration: BoxDecoration(
+            //       borderRadius: BorderRadius.circular(50),
+            //       color: Colors.grey[200],
+            //     ),
+            //     child: Column(
+            //       crossAxisAlignment: CrossAxisAlignment.start,
+            //       children: [
+            //         Container(
+            //           height: 52,
+            //           // margin: EdgeInsets.only(top: 4.0),
+            //           padding: EdgeInsets.only(right: 20),
+            //           // decoration: BoxDecoration(
+            //           //     color:
+            //           //         _color ? Themes.dark_primary : Colors.grey[300],
+            //           //     border: Border.all(
+            //           //         color: _color
+            //           //             ? Themes.dark_white
+            //           //             : Themes.light.primaryColor,
+            //           //         width: 1.0),
+            //           //     borderRadius: BorderRadius.circular(5)),
+            //           child: Row(children: [
+            //             Expanded(
+            //               child: DropdownSearch<String>(
+            //
+            //
+            //
+            //
+            //                 // autoFocusSearchBox: true,
+            //
+            //
+            //
+            //
+            //
+            //
+            //                 enabled: true,
+            //                 popupProps: PopupProps.dialog(),
+            //
+            //
+            //                 // popupProps: PopupProps.dialog(),
+            //                 //to show search box
+            //                 // enabled: true,
+            //                 //list of dropdown items
+            //                 //  dropdownBuilder: _style,
+            //                 dropdownBuilder: _customDropDownAddress,
+            //                 items: List<String>.from(
+            //                     branche.map((e) => e['name'])),
+            //                 // label: "Country",
+            //                 onChanged: (value) {
+            //                   for (var i = 0; i < branche.length; i++) {
+            //                     if (branche[i]['name'] == value) {
+            //                       this.fromBranchID = branche[i]['id'];
+            //                       // this.fromBranchName = branche[i]['name'];
+            //                     }
+            //                   }
+            //                 },
+            //
+            //                 //show selected item
+            //                 selectedItem: this.fromBranchName,
+            //                 // hint: "لال",
+            //               ),
+            //             ),
+            //           ]),
+            //         )
+            //       ],
+            //     ),
+            //   ),
+            // ),
 
             /////////////// الإسم  ///////////////////
             Container(
@@ -648,44 +648,44 @@ class _createAccountState extends State<createAccount> {
 
   ///////////////////////////api Branches ///////////////////////////////////////////////
 
-  Future<void> Branches() async {
-    try {
-      visible_branch_lodding = true;
-      // visible_lodding_net = true;
-      var urlBranches = Uri.parse(api().url + api().Branches);
-      var response = await http.get(
-        urlBranches,
-        headers: {
-          "Authorization": "Bearer $token",
-        },
-      );
-      var responsebody = jsonDecode(response.body);
-      setState(() {
-        branche = responsebody['data'];
-      });
-
-      if (response.statusCode == 200) {
-        this.fromBranchID = branche[0]['id'];
-        this.fromBranchName = branche[0]['name'];
-
-        visible_branch_lodding = false;
-        visible_branch = true;
-        // visible_lodding_net = false;
-        // visible_body = true;
-        // net = false;
-      }
-    } on SocketException {
-      setState(() {
-        // visible_lodding = false;
-        // visible_lodding_net = false;
-
-        // net = true;
-      });
-    } catch (ex) {
-      // visible_lodding = false;
-      // visible_lodding_net = false;
-    }
-  }
+  // Future<void> Branches() async {
+  //   try {
+  //     visible_branch_lodding = true;
+  //     // visible_lodding_net = true;
+  //     var urlBranches = Uri.parse(api().url + api().Branches);
+  //     var response = await http.get(
+  //       urlBranches,
+  //       headers: {
+  //         "Authorization": "Bearer $token",
+  //       },
+  //     );
+  //     var responsebody = jsonDecode(response.body);
+  //     setState(() {
+  //       branche = responsebody['data'];
+  //     });
+  //
+  //     if (response.statusCode == 200) {
+  //       this.fromBranchID = branche[0]['id'];
+  //       this.fromBranchName = branche[0]['name'];
+  //
+  //       visible_branch_lodding = false;
+  //       visible_branch = true;
+  //       // visible_lodding_net = false;
+  //       // visible_body = true;
+  //       // net = false;
+  //     }
+  //   } on SocketException {
+  //     setState(() {
+  //       // visible_lodding = false;
+  //       // visible_lodding_net = false;
+  //
+  //       // net = true;
+  //     });
+  //   } catch (ex) {
+  //     // visible_lodding = false;
+  //     // visible_lodding_net = false;
+  //   }
+  // }
 
   Future<void> Register() async {
     try {
