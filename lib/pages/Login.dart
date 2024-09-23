@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pro_delivery/coponents/Api.dart';
 import 'package:pro_delivery/coponents/darkMode.dart';
 import 'package:pro_delivery/pages/CreateAccount.dart';
-import 'package:pro_delivery/pages/Gmail.dart';
 import 'package:pro_delivery/pages/SendEmail.dart';
 import 'package:pro_delivery/pages/Suppliers/homeSuppliers.dart';
 import 'package:pro_delivery/pages/homePages.dart';
@@ -53,13 +52,6 @@ class _loginState extends State<login> {
                   borderRadius:
                       BorderRadius.only(bottomLeft: Radius.circular(90)),
                   color: Themes.light.primaryColor,
-                  // gradient: LinearGradient(
-                  //     colors: [
-                  //       (Color.fromARGB(255, 85, 51, 117)),
-                  //       (Color.fromARGB(255, 118, 82, 153))
-                  //     ],
-                  //     begin: Alignment.topCenter,
-                  //     end: Alignment.bottomCenter)
                 ),
                 child: Center(
                     child: Column(
@@ -93,13 +85,6 @@ class _loginState extends State<login> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(50),
                   color: Colors.grey[200],
-                  // boxShadow: [
-                  //   BoxShadow(
-                  //       offset: Offset(0, 10),
-                  //       blurRadius: 50,
-                  //       color: Color(0xffEEEEEE)
-                  //       )
-                  // ]
                 ),
                 alignment: Alignment.center,
                 child: TextFormField(
@@ -136,12 +121,6 @@ class _loginState extends State<login> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(50),
                   color: Colors.grey[200],
-                  // boxShadow: [
-                  //   BoxShadow(
-                  //       offset: Offset(0, 10),
-                  //       blurRadius: 50,
-                  //       color: Color(0xffEEEEEE))
-                  // ]
                 ),
                 alignment: Alignment.center,
                 child: TextFormField(
@@ -217,16 +196,8 @@ class _loginState extends State<login> {
                       margin: EdgeInsets.only(left: 20, right: 20, top: 20),
                       height: 54,
                       alignment: Alignment.center,
-                      //  width: double.infinity,
                       decoration: BoxDecoration(
                         color: Themes.light.primaryColor,
-                        // gradient: LinearGradient(
-                        //     colors: [
-                        //       (Color.fromARGB(255, 96, 55, 134)),
-                        //       (Color.fromARGB(255, 149, 102, 192))
-                        //     ],
-                        //     begin: Alignment.centerLeft,
-                        //     end: Alignment.centerRight),
                         borderRadius: BorderRadius.circular(50),
                       ),
                       child: Text("دخول",

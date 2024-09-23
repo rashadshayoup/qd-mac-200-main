@@ -25,11 +25,11 @@ class _createAccountState extends State<createAccount> {
   var _value = false;
   final _Storage = GetStorage();
   var _color = true;
-  // // List<dynamic> branche = [];
-  // // var fromBranchID = "";
-  // // var fromBranchName = "";
-  // bool visible_branch_lodding = true;
-  // bool visible_branch = false;
+  List<dynamic> branche = [];
+  var fromBranchID = "";
+  var fromBranchName = "";
+  bool visible_branch_lodding = true;
+  bool visible_branch = false;
   bool visible_login = true;
   bool visible_ = false;
   var token = "";
@@ -42,33 +42,31 @@ class _createAccountState extends State<createAccount> {
   var password = TextEditingController();
   var passwordHash = TextEditingController();
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _color = _Storage.read("isDarkMode");
-  //   // token = _Storage.read("token");
-  //   Branches();
-  // }
+  @override
+  void initState() {
+    super.initState();
+    _color = _Storage.read("isDarkMode");
+    // token = _Storage.read("token");
+    Branches();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: _color ? Themes.dark_primary : Themes.light_primary,
-      body: SingleChildScrollView(
-          child: Directionality(
-        textDirection: TextDirection.rtl,
-        child: Column(
-          children: [
+        backgroundColor: _color ? Themes.dark_primary : Themes.light_primary,
+        body: SingleChildScrollView(
+            child: Directionality(
+          textDirection: TextDirection.rtl,
+          child: Column(children: [
             Container(
               height: 270,
               decoration: BoxDecoration(
-                borderRadius:
-                    BorderRadius.only(bottomLeft: Radius.circular(90)),
+                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(90)),
                 color: Themes.light.primaryColor,
-                gradient: LinearGradient(colors: [
-                  (Color.fromARGB(255, 85, 51, 117)),
-                  (Color.fromARGB(255, 118, 82, 153))
-                ], begin: Alignment.topCenter, end: Alignment.bottomCenter)
+                // gradient: LinearGradient(colors: [
+                //   (Color.fromARGB(255, 85, 51, 117)),
+                //   (Color.fromARGB(255, 118, 82, 153))
+                // ], begin: Alignment.topCenter, end: Alignment.bottomCenter)
               ),
               child: Center(
                   child: Column(
@@ -86,9 +84,7 @@ class _createAccountState extends State<createAccount> {
                     alignment: Alignment.bottomRight,
                     child: Text(
                       "إنشاء حساب",
-                      style: GoogleFonts.cairo(
-                          textStyle: TextStyle(
-                              fontSize: 20, color: Themes.light_white)),
+                      style: GoogleFonts.cairo(textStyle: TextStyle(fontSize: 20, color: Themes.light_white)),
                     ),
                   )
                 ],
@@ -97,89 +93,67 @@ class _createAccountState extends State<createAccount> {
 
             /////// ------------ DropdownSearch branch ------------ ////////
 
-            // Visibility(
-            //     visible: visible_branch_lodding,
-            //     child: Container(
-            //       margin: EdgeInsets.only(top: 20),
-            //       child: Center(
-            //           child: CircularProgressIndicator(
-            //         valueColor: AlwaysStoppedAnimation<Color>(
-            //             Themes.light.primaryColor),
-            //       )),
-            //     )),
+            Visibility(
+              visible: visible_branch,
+              child: Container(
+                margin: EdgeInsets.only(left: 20, right: 20, top: 70),
+                padding: EdgeInsets.only(left: 20, right: 5),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  color: Colors.grey[200],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: 52,
+                      // margin: EdgeInsets.only(top: 4.0),
+                      padding: EdgeInsets.only(right: 20),
+                      // decoration: BoxDecoration(
+                      //     color:
+                      //         _color ? Themes.dark_primary : Colors.grey[300],
+                      //     border: Border.all(
+                      //         color: _color
+                      //             ? Themes.dark_white
+                      //             : Themes.light.primaryColor,
+                      //         width: 1.0),
+                      //     borderRadius: BorderRadius.circular(5)),
+                      child: Row(children: [
+                        Expanded(
+                          child: DropdownSearch<String>(
+                            // autoFocusSearchBox: true,
 
-            // Visibility(
-            //   visible: visible_branch,
-            //   child: Container(
-            //     margin: EdgeInsets.only(left: 20, right: 20, top: 70),
-            //     padding: EdgeInsets.only(left: 20, right: 5),
-            //     decoration: BoxDecoration(
-            //       borderRadius: BorderRadius.circular(50),
-            //       color: Colors.grey[200],
-            //     ),
-            //     child: Column(
-            //       crossAxisAlignment: CrossAxisAlignment.start,
-            //       children: [
-            //         Container(
-            //           height: 52,
-            //           // margin: EdgeInsets.only(top: 4.0),
-            //           padding: EdgeInsets.only(right: 20),
-            //           // decoration: BoxDecoration(
-            //           //     color:
-            //           //         _color ? Themes.dark_primary : Colors.grey[300],
-            //           //     border: Border.all(
-            //           //         color: _color
-            //           //             ? Themes.dark_white
-            //           //             : Themes.light.primaryColor,
-            //           //         width: 1.0),
-            //           //     borderRadius: BorderRadius.circular(5)),
-            //           child: Row(children: [
-            //             Expanded(
-            //               child: DropdownSearch<String>(
-            //
-            //
-            //
-            //
-            //                 // autoFocusSearchBox: true,
-            //
-            //
-            //
-            //
-            //
-            //
-            //                 enabled: true,
-            //                 popupProps: PopupProps.dialog(),
-            //
-            //
-            //                 // popupProps: PopupProps.dialog(),
-            //                 //to show search box
-            //                 // enabled: true,
-            //                 //list of dropdown items
-            //                 //  dropdownBuilder: _style,
-            //                 dropdownBuilder: _customDropDownAddress,
-            //                 items: List<String>.from(
-            //                     branche.map((e) => e['name'])),
-            //                 // label: "Country",
-            //                 onChanged: (value) {
-            //                   for (var i = 0; i < branche.length; i++) {
-            //                     if (branche[i]['name'] == value) {
-            //                       this.fromBranchID = branche[i]['id'];
-            //                       // this.fromBranchName = branche[i]['name'];
-            //                     }
-            //                   }
-            //                 },
-            //
-            //                 //show selected item
-            //                 selectedItem: this.fromBranchName,
-            //                 // hint: "لال",
-            //               ),
-            //             ),
-            //           ]),
-            //         )
-            //       ],
-            //     ),
-            //   ),
-            // ),
+                            enabled: true,
+                            popupProps: PopupProps.dialog(),
+
+                            // popupProps: PopupProps.dialog(),
+                            //to show search box
+                            // enabled: true,
+                            //list of dropdown items
+                            //  dropdownBuilder: _style,
+                            dropdownBuilder: _customDropDownAddress,
+                            items: List<String>.from(branche.map((e) => e['name'])),
+                            // label: "Country",
+                            onChanged: (value) {
+                              for (var i = 0; i < branche.length; i++) {
+                                if (branche[i]['name'] == value) {
+                                  this.fromBranchID = branche[i]['id'];
+                                  // this.fromBranchName = branche[i]['name'];
+                                }
+                              }
+                            },
+
+                            //show selected item
+                            selectedItem: this.fromBranchName,
+                            // hint: "لال",
+                          ),
+                        ),
+                      ]),
+                    )
+                  ],
+                ),
+              ),
+            ),
 
             /////////////// الإسم  ///////////////////
             Container(
@@ -203,9 +177,7 @@ class _createAccountState extends State<createAccount> {
                   ),
                   hintText: "الإسم الأول",
                   hintStyle: GoogleFonts.cairo(
-                      textStyle: TextStyle(
-                          color: Themes.light.primaryColor,
-                          fontWeight: FontWeight.w500)),
+                      textStyle: TextStyle(color: Themes.light.primaryColor, fontWeight: FontWeight.w500)),
                   enabledBorder: InputBorder.none,
                   focusedBorder: InputBorder.none,
                 ),
@@ -234,9 +206,7 @@ class _createAccountState extends State<createAccount> {
                   ),
                   hintText: "اللقب",
                   hintStyle: GoogleFonts.cairo(
-                      textStyle: TextStyle(
-                          color: Themes.light.primaryColor,
-                          fontWeight: FontWeight.w500)),
+                      textStyle: TextStyle(color: Themes.light.primaryColor, fontWeight: FontWeight.w500)),
                   enabledBorder: InputBorder.none,
                   focusedBorder: InputBorder.none,
                 ),
@@ -271,9 +241,7 @@ class _createAccountState extends State<createAccount> {
                   ),
                   hintText: "اسم المستخدم ",
                   hintStyle: GoogleFonts.cairo(
-                      textStyle: TextStyle(
-                          color: Themes.light.primaryColor,
-                          fontWeight: FontWeight.w500)),
+                      textStyle: TextStyle(color: Themes.light.primaryColor, fontWeight: FontWeight.w500)),
                   enabledBorder: InputBorder.none,
                   focusedBorder: InputBorder.none,
                 ),
@@ -282,324 +250,192 @@ class _createAccountState extends State<createAccount> {
 
             /////////////// الارقام  ///////////////////
 
-            Row(
+            Column(
               children: [
-                Expanded(
-                  child: Container(
-                    margin: EdgeInsets.only(right: 20, top: 30),
-                    padding: EdgeInsets.only(left: 20, right: 15),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: Colors.grey[200],
-                      // boxShadow: [
-                      //   BoxShadow(
-                      //       offset: Offset(0, 10),
-                      //       blurRadius: 50,
-                      //       color: Color(0xffEEEEEE)
-                      //       )
-                      // ]
+                Container(
+                  margin: EdgeInsets.only(left: 20, right: 20, top: 30),
+                  padding: EdgeInsets.only(left: 20, right: 20),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    color: Colors.grey[200],
+                  ),
+                  alignment: Alignment.center,
+                  child: TextField(
+                    controller: phone,
+                    style: TextStyle(
+                      color: Themes.light.primaryColor,
                     ),
-                    alignment: Alignment.center,
-                    child: TextField(
-                      controller: phone,
-                      style: TextStyle(
+                    cursorColor: Themes.light.primaryColor,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(right: -15),
+                      icon: Icon(
+                        Icons.phone_android,
                         color: Themes.light.primaryColor,
                       ),
-                      cursorColor: Themes.light.primaryColor,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(right: -15),
-                        icon: Icon(
-                          Icons.phone_android,
-                          color: Themes.light.primaryColor,
-                        ),
-                        hintText: "رقم الهاتف",
-                        hintStyle: GoogleFonts.cairo(
-                            textStyle: TextStyle(
-                                color: Themes.light.primaryColor,
-                                fontWeight: FontWeight.w500)),
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
+                      hintText: "رقم الهاتف",
+                      hintStyle: GoogleFonts.cairo(
+                          textStyle: TextStyle(color: Themes.light.primaryColor, fontWeight: FontWeight.w500)),
+                      enabledBorder: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                    ),
+                  ),
+                ),
+
+                Container(
+                  margin: EdgeInsets.only(left: 20, right: 20, top: 30),
+                  padding: EdgeInsets.only(left: 20, right: 20),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    color: Colors.grey[200],
+                    // boxShadow: [
+                    //   BoxShadow(
+                    //       offset: Offset(0, 10),
+                    //       blurRadius: 50,
+                    //       color: Color(0xffEEEEEE)
+                    //       )
+                    // ]
+                  ),
+                  alignment: Alignment.center,
+                  child: TextField(
+                    controller: address,
+                    style: TextStyle(
+                      color: Themes.light.primaryColor,
+                    ),
+                    cursorColor: Themes.light.primaryColor,
+                    decoration: InputDecoration(
+                      icon: Icon(
+                        Icons.location_on,
+                        color: Themes.light.primaryColor,
                       ),
+                      hintText: "العنوان",
+                      hintStyle: GoogleFonts.cairo(
+                          textStyle: TextStyle(color: Themes.light.primaryColor, fontWeight: FontWeight.w500)),
+                      enabledBorder: InputBorder.none,
+                      focusedBorder: InputBorder.none,
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: 12,
-                ),
-            //     Expanded(
-            //       child: Container(
-            //         margin: EdgeInsets.only(left: 20, top: 30),
-            //         padding: EdgeInsets.only(left: 20, right: 15),
-            //         decoration: BoxDecoration(
-            //           borderRadius: BorderRadius.circular(50),
-            //           color: Colors.grey[200],
-            //           // boxShadow: [
-            //           //   BoxShadow(
-            //           //       offset: Offset(0, 10),
-            //           //       blurRadius: 50,
-            //           //       color: Color(0xffEEEEEE)
-            //           //       )
-            //           // ]
-            //         ),
-            //         alignment: Alignment.center,
-            //         child: TextField(
-            //           controller: ,
-            //           style: TextStyle(
-            //             color: Themes.light.primaryColor,
-            //           ),
-            //           cursorColor: Themes.light.primaryColor,
-            //           decoration: InputDecoration(
-            //             contentPadding: EdgeInsets.only(right: -15),
-            //             icon: Icon(
-            //               Icons.phone_android,
-            //               color: Themes.light.primaryColor,
-            //             ),
-            //             hintText: "رقم الهاتف 2",
-            //             hintStyle: GoogleFonts.cairo(
-            //                 textStyle: TextStyle(
-            //                     color: Themes.light.primaryColor,
-            //                     fontWeight: FontWeight.w500)),
-            //             enabledBorder: InputBorder.none,
-            //             focusedBorder: InputBorder.none,
-            //           ),
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // ),
 
-            /////////////// العنوان  ///////////////////
-            Container(
-              margin: EdgeInsets.only(left: 20, right: 20, top: 30),
-              padding: EdgeInsets.only(left: 20, right: 20),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                color: Colors.grey[200],
-                // boxShadow: [
-                //   BoxShadow(
-                //       offset: Offset(0, 10),
-                //       blurRadius: 50,
-                //       color: Color(0xffEEEEEE)
-                //       )
-                // ]
-              ),
-              alignment: Alignment.center,
-              child: TextField(
-                controller: address,
-                style: TextStyle(
-                  color: Themes.light.primaryColor,
-                ),
-                cursorColor: Themes.light.primaryColor,
-                decoration: InputDecoration(
-                  icon: Icon(
-                    Icons.location_on,
-                    color: Themes.light.primaryColor,
-                  ),
-                  hintText: "العنوان",
-                  hintStyle: GoogleFonts.cairo(
-                      textStyle: TextStyle(
-                          color: Themes.light.primaryColor,
-                          fontWeight: FontWeight.w500)),
-                  enabledBorder: InputBorder.none,
-                  focusedBorder: InputBorder.none,
-                ),
-              ),
-            ),
-
-            /////////////// كلمة المرور  ///////////////////
-            Container(
-              margin: EdgeInsets.only(left: 20, right: 20, top: 30),
-              padding: EdgeInsets.only(left: 20, right: 20),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                color: Colors.grey[200],
-                // boxShadow: [
-                //   BoxShadow(
-                //       offset: Offset(0, 10),
-                //       blurRadius: 50,
-                //       color: Color(0xffEEEEEE))
-                // ]
-              ),
-              alignment: Alignment.center,
-              child: TextField(
-                controller: password,
-                style: TextStyle(
-                  color: Themes.light.primaryColor,
-                ),
-                obscureText: true,
-                cursorColor: Themes.light.primaryColor,
-                decoration: InputDecoration(
-                  icon: Icon(
-                    Icons.vpn_key,
-                    color: Themes.light.primaryColor,
-                  ),
-                  hintText: "كلمة المرور",
-                  hintStyle: GoogleFonts.cairo(
-                      textStyle: TextStyle(
-                          color: Themes.light.primaryColor,
-                          fontWeight: FontWeight.w500)),
-                  enabledBorder: InputBorder.none,
-                  focusedBorder: InputBorder.none,
-                ),
-              ),
-            ),
-
-            /////////////// تأكيد كلمة المرور  ///////////////////
-            Container(
-              margin: EdgeInsets.only(left: 20, right: 20, top: 30),
-              padding: EdgeInsets.only(left: 20, right: 20),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                color: Colors.grey[200],
-                // boxShadow: [
-                //   BoxShadow(
-                //       offset: Offset(0, 10),
-                //       blurRadius: 50,
-                //       color: Color(0xffEEEEEE))
-                // ]
-              ),
-              alignment: Alignment.center,
-              child: TextField(
-                controller: passwordHash,
-                style: TextStyle(
-                  color: Themes.light.primaryColor,
-                ),
-                obscureText: true,
-                cursorColor: Themes.light.primaryColor,
-                decoration: InputDecoration(
-                  icon: Icon(
-                    Icons.vpn_key,
-                    color: Themes.light.primaryColor,
-                  ),
-                  hintText: "تأكيد كلمة المرور",
-                  hintStyle: GoogleFonts.cairo(
-                      textStyle: TextStyle(
-                          color: Themes.light.primaryColor,
-                          fontWeight: FontWeight.w500)),
-                  enabledBorder: InputBorder.none,
-                  focusedBorder: InputBorder.none,
-                ),
-              ),
-            ),
-
-            Row(
-              children: <Widget>[
+                /////////////// كلمة المرور  ///////////////////
                 Container(
-                  margin: EdgeInsets.only(left: 0, right: 10, top: 15),
-                  // padding: EdgeInsets.only(left: 20, right: 20),
-
-                  child: Theme(
-                    data: ThemeData(
-                      unselectedWidgetColor: _color
-                          ? Themes.dark_white
-                          : Themes.light.primaryColor, // Your color
+                  margin: EdgeInsets.only(left: 20, right: 20, top: 30),
+                  padding: EdgeInsets.only(left: 20, right: 20),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    color: Colors.grey[200],
+                    // boxShadow: [
+                    //   BoxShadow(
+                    //       offset: Offset(0, 10),
+                    //       blurRadius: 50,
+                    //       color: Color(0xffEEEEEE))
+                    // ]
+                  ),
+                  alignment: Alignment.center,
+                  child: TextField(
+                    controller: password,
+                    style: TextStyle(
+                      color: Themes.light.primaryColor,
                     ),
-                    child: Checkbox(
-                        value: _value,
-                        activeColor: Themes.light.primaryColor,
-                        onChanged: (val) {
-                          setState(() {
-                            if (val == true) {
-                              _value = true;
-                            } else {
-                              _value = false;
-                            }
-                          });
-                        }),
+                    obscureText: true,
+                    cursorColor: Themes.light.primaryColor,
+                    decoration: InputDecoration(
+                      icon: Icon(
+                        Icons.vpn_key,
+                        color: Themes.light.primaryColor,
+                      ),
+                      hintText: "كلمة المرور",
+                      hintStyle: GoogleFonts.cairo(
+                          textStyle: TextStyle(color: Themes.light.primaryColor, fontWeight: FontWeight.w500)),
+                      enabledBorder: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                    ),
                   ),
                 ),
-                Container(
-                    margin: EdgeInsets.only(left: 0, right: 0, top: 15),
-                    // alignment: Alignment.bottomRight,
 
-                    child: Row(
-                      children: [
-                        Text(
-                          "أوافق علي",
-                          style: GoogleFonts.cairo(
-                              textStyle: TextStyle(
-                                  fontSize: 14,
-                                  color: _color
-                                      ? Themes.light_white
-                                      : Themes.light_black)),
-                        ),
-                        SizedBox(
-                          width: 3,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => terms()),
-                            );
-                          },
-                          child: Text(
-                            "شروط الخدمة",
-                            style: GoogleFonts.cairo(
-                                textStyle: TextStyle(
-                              fontSize: 14,
-                              color: _color
-                                  ? Themes.light_grey
-                                  : Themes.light.primaryColor,
-                              decoration: TextDecoration.underline,
-                            )),
-                          ),
-                        ),
-                      ],
+                /////////////// تأكيد كلمة المرور  ///////////////////
+                Container(
+                  margin: EdgeInsets.only(left: 20, right: 20, top: 30),
+                  padding: EdgeInsets.only(left: 20, right: 20),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    color: Colors.grey[200],
+                    // boxShadow: [
+                    //   BoxShadow(
+                    //       offset: Offset(0, 10),
+                    //       blurRadius: 50,
+                    //       color: Color(0xffEEEEEE))
+                    // ]
+                  ),
+                  alignment: Alignment.center,
+                  child: TextField(
+                    controller: passwordHash,
+                    style: TextStyle(
+                      color: Themes.light.primaryColor,
+                    ),
+                    obscureText: true,
+                    cursorColor: Themes.light.primaryColor,
+                    decoration: InputDecoration(
+                      icon: Icon(
+                        Icons.vpn_key,
+                        color: Themes.light.primaryColor,
+                      ),
+                      hintText: "تأكيد كلمة المرور",
+                      hintStyle: GoogleFonts.cairo(
+                          textStyle: TextStyle(color: Themes.light.primaryColor, fontWeight: FontWeight.w500)),
+                      enabledBorder: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                    ),
+                  ),
+                ),
+
+                Visibility(
+                    visible: visible_,
+                    child: Container(
+                      margin: EdgeInsets.only(top: 20, bottom: 30),
+                      child: Center(
+                          child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(Themes.light.primaryColor),
+                      )),
                     )),
+
+                Visibility(
+                  visible: visible_login,
+                  child: GestureDetector(
+                    onTap: () {
+                      Register();
+                    },
+                    child: Container(
+                        margin: EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 40),
+                        height: 54,
+                        alignment: Alignment.center,
+                        //  width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Themes.light.primaryColor,
+                          // gradient: LinearGradient(colors: [
+                          //   (Color.fromARGB(255, 96, 55, 134)),
+                          //   (Color.fromARGB(255, 149, 102, 192))
+                          // ], begin: Alignment.centerLeft, end: Alignment.centerRight),
+                          borderRadius: BorderRadius.circular(50),
+                          // boxShadow: [
+                          //   BoxShadow(
+                          //       offset: Offset(0, 10),
+                          //       blurRadius: 50,
+                          //       color: Color(0xffEEEEEE))
+                          // ]
+                        ),
+                        child: Text("تسجيل",
+                            style: GoogleFonts.cairo(
+                              textStyle: TextStyle(
+                                color: Themes.light_white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ))),
+                  ),
+                ),
               ],
             ),
-
-            Visibility(
-                visible: visible_,
-                child: Container(
-                  margin: EdgeInsets.only(top: 20, bottom: 30),
-                  child: Center(
-                      child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                        Themes.light.primaryColor),
-                  )),
-                )),
-
-            Visibility(
-              visible: visible_login,
-              child: GestureDetector(
-                onTap: () {
-                  Register();
-                },
-                child: Container(
-                    margin: EdgeInsets.only(
-                        left: 20, right: 20, top: 30, bottom: 40),
-                    height: 54,
-                    alignment: Alignment.center,
-                    //  width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Themes.light.primaryColor,
-                      // gradient: LinearGradient(colors: [
-                      //   (Color.fromARGB(255, 96, 55, 134)),
-                      //   (Color.fromARGB(255, 149, 102, 192))
-                      // ], begin: Alignment.centerLeft, end: Alignment.centerRight),
-                      borderRadius: BorderRadius.circular(50),
-                      // boxShadow: [
-                      //   BoxShadow(
-                      //       offset: Offset(0, 10),
-                      //       blurRadius: 50,
-                      //       color: Color(0xffEEEEEE))
-                      // ]
-                    ),
-                    child: Text("تسجيل",
-                        style: GoogleFonts.cairo(
-                          textStyle: TextStyle(
-                            color: Themes.light_white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ))),
-              ),
-            ),
-          ],
-        ),
-      ]),
-    )));
+          ]),
+        )));
   }
 
   Widget _customDropDownAddress(BuildContext context, _addressFilteredName) {
@@ -610,9 +446,7 @@ class _createAccountState extends State<createAccount> {
                 textStyle: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
-                    color: _color
-                        ? Themes.light.primaryColor
-                        : Themes.light.primaryColor))));
+                    color: _color ? Themes.light.primaryColor : Themes.light.primaryColor))));
   }
 
   Widget _style1(BuildContext context, String? item, bool isSelected) {
@@ -648,44 +482,44 @@ class _createAccountState extends State<createAccount> {
 
   ///////////////////////////api Branches ///////////////////////////////////////////////
 
-  // Future<void> Branches() async {
-  //   try {
-  //     visible_branch_lodding = true;
-  //     // visible_lodding_net = true;
-  //     var urlBranches = Uri.parse(api().url + api().Branches);
-  //     var response = await http.get(
-  //       urlBranches,
-  //       headers: {
-  //         "Authorization": "Bearer $token",
-  //       },
-  //     );
-  //     var responsebody = jsonDecode(response.body);
-  //     setState(() {
-  //       branche = responsebody['data'];
-  //     });
-  //
-  //     if (response.statusCode == 200) {
-  //       this.fromBranchID = branche[0]['id'];
-  //       this.fromBranchName = branche[0]['name'];
-  //
-  //       visible_branch_lodding = false;
-  //       visible_branch = true;
-  //       // visible_lodding_net = false;
-  //       // visible_body = true;
-  //       // net = false;
-  //     }
-  //   } on SocketException {
-  //     setState(() {
-  //       // visible_lodding = false;
-  //       // visible_lodding_net = false;
-  //
-  //       // net = true;
-  //     });
-  //   } catch (ex) {
-  //     // visible_lodding = false;
-  //     // visible_lodding_net = false;
-  //   }
-  // }
+  Future<void> Branches() async {
+    try {
+      visible_branch_lodding = true;
+      // visible_lodding_net = true;
+      var urlBranches = Uri.parse(api().url + api().Branches);
+      var response = await http.get(
+        urlBranches,
+        headers: {
+          "Authorization": "Bearer $token",
+        },
+      );
+      var responsebody = jsonDecode(response.body);
+      setState(() {
+        branche = responsebody['data'];
+      });
+
+      if (response.statusCode == 200) {
+        this.fromBranchID = branche[0]['id'];
+        this.fromBranchName = branche[0]['name'];
+
+        visible_branch_lodding = false;
+        visible_branch = true;
+        // visible_lodding_net = false;
+        // visible_body = true;
+        // net = false;
+      }
+    } on SocketException {
+      setState(() {
+        // visible_lodding = false;
+        // visible_lodding_net = false;
+
+        // net = true;
+      });
+    } catch (ex) {
+      // visible_lodding = false;
+      // visible_lodding_net = false;
+    }
+  }
 
   Future<void> Register() async {
     try {
@@ -698,9 +532,7 @@ class _createAccountState extends State<createAccount> {
               textDirection: TextDirection.rtl,
               child: Text(
                 "الرجاء إدخال الإسم",
-                style: GoogleFonts.cairo(
-                    textStyle:
-                        TextStyle(fontSize: 14, color: Themes.light_white)),
+                style: GoogleFonts.cairo(textStyle: TextStyle(fontSize: 14, color: Themes.light_white)),
               ),
             )));
       } else if (User_Name.text == "") {
@@ -712,9 +544,7 @@ class _createAccountState extends State<createAccount> {
               textDirection: TextDirection.rtl,
               child: Text(
                 "الرجاء إدخال اسم الصفحة",
-                style: GoogleFonts.cairo(
-                    textStyle:
-                        TextStyle(fontSize: 14, color: Themes.light_white)),
+                style: GoogleFonts.cairo(textStyle: TextStyle(fontSize: 14, color: Themes.light_white)),
               ),
             )));
       } else if (Last_name.text == "") {
@@ -726,13 +556,10 @@ class _createAccountState extends State<createAccount> {
               textDirection: TextDirection.rtl,
               child: Text(
                 "الرجاء إدخال اللقب",
-                style: GoogleFonts.cairo(
-                    textStyle:
-                        TextStyle(fontSize: 14, color: Themes.light_white)),
+                style: GoogleFonts.cairo(textStyle: TextStyle(fontSize: 14, color: Themes.light_white)),
               ),
             )));
-      }
-       else if (phone.text == "") {
+      } else if (phone.text == "") {
         ScaffoldMessenger.of(context).clearSnackBars();
 
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -741,9 +568,7 @@ class _createAccountState extends State<createAccount> {
               textDirection: TextDirection.rtl,
               child: Text(
                 "الرجاء إدخال رقم الهاتف",
-                style: GoogleFonts.cairo(
-                    textStyle:
-                        TextStyle(fontSize: 14, color: Themes.light_white)),
+                style: GoogleFonts.cairo(textStyle: TextStyle(fontSize: 14, color: Themes.light_white)),
               ),
             )));
       } else if (address.text == "") {
@@ -755,9 +580,7 @@ class _createAccountState extends State<createAccount> {
               textDirection: TextDirection.rtl,
               child: Text(
                 "الرجاء إدخال العنوان",
-                style: GoogleFonts.cairo(
-                    textStyle:
-                        TextStyle(fontSize: 14, color: Themes.light_white)),
+                style: GoogleFonts.cairo(textStyle: TextStyle(fontSize: 14, color: Themes.light_white)),
               ),
             )));
       } else if (password.text == "") {
@@ -767,9 +590,7 @@ class _createAccountState extends State<createAccount> {
               textDirection: TextDirection.rtl,
               child: Text(
                 "الرجاء إدخال كلمة المرور",
-                style: GoogleFonts.cairo(
-                    textStyle:
-                        TextStyle(fontSize: 14, color: Themes.light_white)),
+                style: GoogleFonts.cairo(textStyle: TextStyle(fontSize: 14, color: Themes.light_white)),
               ),
             )));
       } else if (passwordHash.text == "") {
@@ -781,9 +602,7 @@ class _createAccountState extends State<createAccount> {
               textDirection: TextDirection.rtl,
               child: Text(
                 "الرجاء تأكيد كلمة المرور",
-                style: GoogleFonts.cairo(
-                    textStyle:
-                        TextStyle(fontSize: 14, color: Themes.light_white)),
+                style: GoogleFonts.cairo(textStyle: TextStyle(fontSize: 14, color: Themes.light_white)),
               ),
             )));
       } else if (passwordHash.text != password.text) {
@@ -795,9 +614,7 @@ class _createAccountState extends State<createAccount> {
               textDirection: TextDirection.rtl,
               child: Text(
                 "كلمة المرور غير متطابقة",
-                style: GoogleFonts.cairo(
-                    textStyle:
-                        TextStyle(fontSize: 14, color: Themes.light_white)),
+                style: GoogleFonts.cairo(textStyle: TextStyle(fontSize: 14, color: Themes.light_white)),
               ),
             )));
       } else if (_value == false) {
@@ -809,9 +626,7 @@ class _createAccountState extends State<createAccount> {
               textDirection: TextDirection.rtl,
               child: Text(
                 "الرجاء الموافقة على شروط الخدمة",
-                style: GoogleFonts.cairo(
-                    textStyle:
-                        TextStyle(fontSize: 14, color: Themes.light_white)),
+                style: GoogleFonts.cairo(textStyle: TextStyle(fontSize: 14, color: Themes.light_white)),
               ),
             )));
       } else {
@@ -828,26 +643,19 @@ class _createAccountState extends State<createAccount> {
             "userName": User_Name.text,
             "password": passwordHash.text,
             "phoneNumber": phone.text,
-
           };
-          var urlLogin = Uri.parse(
-              api().url + api().Register + api().URLFrontend + "EmailConfirm");
+          var urlLogin = Uri.parse(api().url + api().Register + api().URLFrontend + "EmailConfirm");
 
           var response = await http.post(
             urlLogin,
             body: jsonEncode(_body),
-            headers: {
-              "Authorization": "Bearer",
-              "Accept": "application/json",
-              "content-type": "application/json"
-            },
+            headers: {"Authorization": "Bearer", "Accept": "application/json", "content-type": "application/json"},
           );
           var responsebody = jsonDecode(response.body);
 
           if (response.statusCode == 200) {
             setState(() {
-              Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) => gmail()));
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => gmail()));
               visible_login = true;
               visible_ = false;
             });
@@ -859,9 +667,7 @@ class _createAccountState extends State<createAccount> {
                   textDirection: TextDirection.rtl,
                   child: Text(
                     responsebody["message"],
-                    style: GoogleFonts.cairo(
-                        textStyle:
-                            TextStyle(fontSize: 14, color: Themes.light_white)),
+                    style: GoogleFonts.cairo(textStyle: TextStyle(fontSize: 14, color: Themes.light_white)),
                   ),
                 )));
             setState(() {
@@ -881,9 +687,7 @@ class _createAccountState extends State<createAccount> {
                 textDirection: TextDirection.rtl,
                 child: Text(
                   "خطأ في الاتصال بالانترنت",
-                  style: GoogleFonts.cairo(
-                      textStyle:
-                          TextStyle(fontSize: 14, color: Themes.light_white)),
+                  style: GoogleFonts.cairo(textStyle: TextStyle(fontSize: 14, color: Themes.light_white)),
                 ),
               )));
         } catch (ex) {

@@ -56,7 +56,7 @@ class _tabsorderState extends State<tabsorder> {
         body: TabBarView(
           children: [
             order(),
-            movements(),
+            order(pending: false,),
 
             // Center(
             //   child: Text("It's cloudy here"),
