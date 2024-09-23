@@ -30,8 +30,16 @@ abstract class WebServices {
 
   @GET('/api/Order/GetOrderByCustomer')
   Future<OrderContent> getOrders();
-  
+
 
   @POST('/api/Auth/SingUp')
-  Future<void> signUp(@Body() SignUpRequest request);
-}
+  Future<void> signUp({
+    @Body('firstName') required String firstName,
+    @Body('lastName') required String lastName,
+    @Body('address') required String address,
+    @Body('userName') required String userName,
+    @Body('password') required String password,
+    @Body('phoneNumber') required String phoneNumber,
+
+
+  });

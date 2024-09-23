@@ -118,11 +118,11 @@ class _createAccountState extends State<createAccount> {
   Future<void> add() async {
     final webServices = WebServices(NetworkConfig.config());
     final response = await webServices.signUp(
-        First_name: First_name.text,
-        Last_name: Last_name.text,
+        firstName: First_name.text,
+        lastName: Last_name.text,
         address: address.text,
-        User_Name: User_Name.text,
-        phone: phone.text,
+        userName: User_Name.text,
+        phoneNumber: phone.text,
         password: password.text);
 
     ScaffoldMessenger.of(context).clearSnackBars();
@@ -131,7 +131,7 @@ class _createAccountState extends State<createAccount> {
         content: Directionality(
           textDirection: ui.TextDirection.rtl,
           child: Text(
-            "تمت الاضافة بنجاح",
+            "تم عمل حساب بنجاح",
             style: GoogleFonts.cairo(textStyle: TextStyle(fontSize: 14, color: Themes.light_white)),
           ),
         )));
