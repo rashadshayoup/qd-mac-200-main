@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:pro_delivery/data/models/branch_model.dart';
 import 'package:pro_delivery/data/models/city_model.dart';
 import 'package:pro_delivery/data/models/order_model.dart';
+import 'package:pro_delivery/data/models/signUp_request_model.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'web_services.g.dart';
@@ -29,4 +30,8 @@ abstract class WebServices {
 
   @GET('/api/Order/GetOrderByCustomer')
   Future<OrderContent> getOrders();
+  
+
+  @POST('/api/Auth/SingUp')
+  Future<void> signUp(@Body() SignUpRequest request);
 }

@@ -1,7 +1,7 @@
 class api {
   // var url = "https://demo.qdlibya.com/";
   // var URLFrontend = "https://qdl-master.herokuapp.com/" ;
-  var url = "http://10.101.120.68:8888/";
+  final url = "http://10.0.2.2:8888/";
   var URLFrontend = "https://www.qdlibya.com/";
 
   var urlIcon = "assets/Qdly.png";
