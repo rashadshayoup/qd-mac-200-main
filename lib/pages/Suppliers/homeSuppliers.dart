@@ -116,37 +116,37 @@ class _homeSuppliersState extends State<homeSuppliers> {
                               ],
                             ),
                           ),
-                          MaterialButton(
-                            minWidth: 30,
-                            onPressed: () {
-                              setState(() {
-                                currenScreen = branches();
-                                currentTab = 1;
-                              });
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.delivery_dining_sharp,
-                                  color: currentTab == 1
-                                      ? Themes.light.primaryColor
-                                      : Colors.grey,
-                                ),
-                                Text(
-                                  "اسعار التوصيل",
-                                  style: GoogleFonts.cairo(
-                                      textStyle: TextStyle(
-                                    fontSize: _width < 321 ? 10 : 12,
-                                    fontWeight: currentTab == 1
-                                        ? FontWeight.bold
-                                        : FontWeight.normal,
-                                    color: Themes.light_grey,
-                                  )),
-                                )
-                              ],
-                            ),
-                          ),
+                          // MaterialButton(
+                          //   minWidth: 30,
+                          //   onPressed: () {
+                          //     setState(() {
+                          //       currenScreen = branches();
+                          //       currentTab = 1;
+                          //     });
+                          //   },
+                          //   child: Column(
+                          //     mainAxisAlignment: MainAxisAlignment.center,
+                          //     children: [
+                          //       Icon(
+                          //         Icons.delivery_dining_sharp,
+                          //         color: currentTab == 1
+                          //             ? Themes.light.primaryColor
+                          //             : Colors.grey,
+                          //       ),
+                          //       Text(
+                          //         "اسعار التوصيل",
+                          //         style: GoogleFonts.cairo(
+                          //             textStyle: TextStyle(
+                          //           fontSize: _width < 321 ? 10 : 12,
+                          //           fontWeight: currentTab == 1
+                          //               ? FontWeight.bold
+                          //               : FontWeight.normal,
+                          //           color: Themes.light_grey,
+                          //         )),
+                          //       )
+                          //     ],
+                          //   ),
+                          // ),
                           MaterialButton(
                             minWidth: 30,
                             onPressed: () {
@@ -191,32 +191,32 @@ class _homeSuppliersState extends State<homeSuppliers> {
     return AppBar(
       backgroundColor: Themes.light.primaryColor,
       elevation: currentTab == 0 ? 0 : null,
-      leading: Container(
-          margin: EdgeInsets.all(5),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(50),
-            child: Image.asset(
-              api().urlIcon,
-              height: 40,
-              width: 40,
-              // fit: BoxFit.cover,
-            ),
-          )),
+      // leading: Container(
+      //     margin: EdgeInsets.all(5),
+      //     child: ClipRRect(
+      //       borderRadius: BorderRadius.circular(50),
+      //       child: Image.asset(
+      //         api().urlIcon,
+      //         height: 40,
+      //         width: 40,
+      //         // fit: BoxFit.cover,
+      //       ),
+      //     )),
       actions: <Widget>[
         SizedBox(
           width: 20,
         ),
-        IconButton(
-          icon: const Icon(
-            Icons.search_outlined,
-            size: 25,
-          ),
-          onPressed: () {
-            setState(() {
-              Navigator.pushNamed(context, 'search');
-            });
-          },
-        ),
+        // IconButton(
+        //   icon: const Icon(
+        //     Icons.search_outlined,
+        //     size: 25,
+        //   ),
+        //   onPressed: () {
+        //     setState(() {
+        //       Navigator.pushNamed(context, 'search');
+        //     });
+        //   },
+        // ),
         SizedBox(
           width: 20,
         )
