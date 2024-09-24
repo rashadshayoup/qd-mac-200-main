@@ -17,18 +17,16 @@ class SignUpRequest {
   @JsonKey(name: 'phoneNumber', defaultValue: '')
   String phoneNumber;
 
+  SignUpRequest({
+    required this.firstName,
+    required this.lastName,
+    required this.address,
+    required this.userName,
+    required this.password,
+    required this.phoneNumber,
+  });
 
-  SignUpRequest(
-      this.firstName,
-      this.lastName,
-      this.address,
-      this.userName,
-      this.password,
-      this.phoneNumber,
-      );
-
-  factory SignUpRequest.fromJson(Map<String, dynamic> json) =>
-      _$SignUpRequestFromJson(json);
+  factory SignUpRequest.fromJson(Map<String, dynamic> json) => _$SignUpRequestFromJson(json);
   Map<String, dynamic> toJson() => _$SignUpRequestToJson(this);
 }
 

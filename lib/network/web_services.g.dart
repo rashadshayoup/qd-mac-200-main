@@ -10,10 +10,10 @@ part of 'web_services.dart';
 
 class _WebServices implements WebServices {
   _WebServices(
-      this._dio, {
-        this.baseUrl,
-        this.errorLogger,
-      }) {
+    this._dio, {
+    this.baseUrl,
+    this.errorLogger,
+  }) {
     baseUrl ??= 'http://10.0.2.2:8888/';
   }
 
@@ -35,13 +35,13 @@ class _WebServices implements WebServices {
       extra: _extra,
     )
         .compose(
-      _dio.options,
-      'api/Branch/GetBranchs',
-      queryParameters: queryParameters,
-      data: _data,
-    )
+          _dio.options,
+          'api/Branch/GetBranchs',
+          queryParameters: queryParameters,
+          data: _data,
+        )
         .copyWith(
-        baseUrl: _combineBaseUrls(
+            baseUrl: _combineBaseUrls(
           _dio.options.baseUrl,
           baseUrl,
         )));
@@ -68,13 +68,13 @@ class _WebServices implements WebServices {
       extra: _extra,
     )
         .compose(
-      _dio.options,
-      'api/City/GetCitiesByBranchId',
-      queryParameters: queryParameters,
-      data: _data,
-    )
+          _dio.options,
+          'api/City/GetCitiesByBranchId',
+          queryParameters: queryParameters,
+          data: _data,
+        )
         .copyWith(
-        baseUrl: _combineBaseUrls(
+            baseUrl: _combineBaseUrls(
           _dio.options.baseUrl,
           baseUrl,
         )));
@@ -115,13 +115,13 @@ class _WebServices implements WebServices {
       extra: _extra,
     )
         .compose(
-      _dio.options,
-      'api/Order/CreateOrder',
-      queryParameters: queryParameters,
-      data: _data,
-    )
+          _dio.options,
+          'api/Order/CreateOrder',
+          queryParameters: queryParameters,
+          data: _data,
+        )
         .copyWith(
-        baseUrl: _combineBaseUrls(
+            baseUrl: _combineBaseUrls(
           _dio.options.baseUrl,
           baseUrl,
         )));
@@ -140,13 +140,13 @@ class _WebServices implements WebServices {
       extra: _extra,
     )
         .compose(
-      _dio.options,
-      '/api/Order/GetOrderByCustomer',
-      queryParameters: queryParameters,
-      data: _data,
-    )
+          _dio.options,
+          '/api/Order/GetOrderByCustomer',
+          queryParameters: queryParameters,
+          data: _data,
+        )
         .copyWith(
-        baseUrl: _combineBaseUrls(
+            baseUrl: _combineBaseUrls(
           _dio.options.baseUrl,
           baseUrl,
         )));
@@ -159,6 +159,32 @@ class _WebServices implements WebServices {
       rethrow;
     }
     return _value;
+  }
+
+  @override
+  Future<void> signUp({required SignUpRequest request}) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson());
+    final _options = _setStreamType<void>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/api/Auth/SingUp',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    await _dio.fetch<void>(_options);
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
@@ -175,9 +201,9 @@ class _WebServices implements WebServices {
   }
 
   String _combineBaseUrls(
-      String dioBaseUrl,
-      String? baseUrl,
-      ) {
+    String dioBaseUrl,
+    String? baseUrl,
+  ) {
     if (baseUrl == null || baseUrl.trim().isEmpty) {
       return dioBaseUrl;
     }
@@ -189,11 +215,5 @@ class _WebServices implements WebServices {
     }
 
     return Uri.parse(dioBaseUrl).resolveUri(url).toString();
-  }
-
-  @override
-  Future<void> signUp(SignUpRequest request) {
-    // TODO: implement signUp
-    throw UnimplementedError();
   }
 }

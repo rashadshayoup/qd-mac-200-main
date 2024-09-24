@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pro_delivery/coponents/Api.dart';
 import 'package:pro_delivery/coponents/darkMode.dart';
+import 'package:pro_delivery/data/models/signUp_request_model.dart';
 import 'package:pro_delivery/network/config_network.dart';
 import 'package:pro_delivery/network/web_services.dart';
 import 'package:dio/dio.dart';
@@ -18,7 +19,6 @@ class createAccount extends StatefulWidget {
 }
 
 class _createAccountState extends State<createAccount> {
-
   var First_name = TextEditingController();
   var Last_name = TextEditingController();
   var address = TextEditingController();
@@ -27,7 +27,6 @@ class _createAccountState extends State<createAccount> {
   var password = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
-
 
   @override
   void initState() {
@@ -47,50 +46,50 @@ class _createAccountState extends State<createAccount> {
                 padding: EdgeInsets.only(left: 20, right: 20),
                 child: SingleChildScrollView(
                     child: Column(children: [
-                      AppTextField(
-                          title: 'الأسم الأول',
-                          hint: 'أدخل الأسم',
-                          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                          controller: First_name,
-                      ),
-                      AppTextField(
-                          title: 'اللقب',
-                          hint: 'أدخل اللقب',
-                          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                          controller: Last_name,
-                        ),
-                      AppTextField(
-                        title: 'العنوان',
-                        hint: 'أدخل العنوان',
-                        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                        controller: address,
-                      ),
-                      AppTextField(
-                        title: 'أسم المستخدم',
-                        hint: 'ادخل أسم المستخدم',
-                        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                        controller: User_Name,
-                      ),
-                      AppTextField(
-                        title: 'رقم الهاتف',
-                        hint: 'أدخل رقم الهاتف',
-                        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                        controller: phone,
-                      ),
-                      AppTextField(
-                        title: 'الرقم السري',
-                        hint: 'أدخل الرقم السري',
-                        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                        controller: password,
-                      ),
-                      AppButton(
-                          text: 'اضافة طلب',
-                          onPressed: () {
-                            if (formKey.currentState!.validate()) {
-                              add();
-                            }
-                          })
-                    ])),
+                  AppTextField(
+                    title: 'الأسم الأول',
+                    hint: 'أدخل الأسم',
+                    margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    controller: First_name,
+                  ),
+                  AppTextField(
+                    title: 'اللقب',
+                    hint: 'أدخل اللقب',
+                    margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    controller: Last_name,
+                  ),
+                  AppTextField(
+                    title: 'العنوان',
+                    hint: 'أدخل العنوان',
+                    margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    controller: address,
+                  ),
+                  AppTextField(
+                    title: 'أسم المستخدم',
+                    hint: 'ادخل أسم المستخدم',
+                    margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    controller: User_Name,
+                  ),
+                  AppTextField(
+                    title: 'رقم الهاتف',
+                    hint: 'أدخل رقم الهاتف',
+                    margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    controller: phone,
+                  ),
+                  AppTextField(
+                    title: 'الرقم السري',
+                    hint: 'أدخل الرقم السري',
+                    margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    controller: password,
+                  ),
+                  AppButton(
+                      text: 'اضافة طلب',
+                      onPressed: () {
+                        if (formKey.currentState!.validate()) {
+                          add();
+                        }
+                      })
+                ])),
               ),
             )));
   }
@@ -118,12 +117,14 @@ class _createAccountState extends State<createAccount> {
   Future<void> add() async {
     final webServices = WebServices(NetworkConfig.config());
     final response = await webServices.signUp(
-        firstName: First_name.text,
-        lastName: Last_name.text,
-        address: address.text,
-        userName: User_Name.text,
-        phoneNumber: phone.text,
-        password: password.text);
+        request: SignUpRequest(
+      firstName: First_name.text,
+      lastName: Last_name.text,
+      address: address.text,
+      userName: User_Name.text,
+      phoneNumber: phone.text,
+      password: password.text,
+    ));
 
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(

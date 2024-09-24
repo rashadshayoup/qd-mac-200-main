@@ -33,12 +33,5 @@ abstract class WebServices {
 
 
   @POST('/api/Auth/SingUp')
-  Future<void> signUp(@Body() SignUpRequest request, {
-    required String firstName,
-    required String lastName,
-    required String address,
-    required String userName,
-    required String phoneNumber,
-    required String password
-  });
+  Future<void> signUp({@Body() required SignUpRequest request});
 }
