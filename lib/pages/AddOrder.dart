@@ -10,7 +10,8 @@ import 'package:pro_delivery/network/web_services.dart';
 import 'package:dio/dio.dart';
 import 'package:pro_delivery/widgets/button/button.dart';
 import 'dart:ui' as ui;
-
+import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:pro_delivery/widgets/picker/picker_field.dart';
 import 'package:pro_delivery/widgets/text_field/text_field.dart';
 
@@ -44,8 +45,10 @@ class _addOrderState extends State<addOrder> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
         backgroundColor: Themes.light_primary,
         appBar: _appBar(),
+
         body: Directionality(
             textDirection: ui.TextDirection.rtl,
             child: Form(
@@ -80,7 +83,7 @@ class _addOrderState extends State<addOrder> {
                       }),
                   AppTextField(
                     title: 'رقم الهاتف',
-                    hint: 'ادخل رقم الهاتف',
+                    hint: 'ادخل رقم هاتف المستلم',
                     margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                     controller: recipientPhoneNo,
                   ),
@@ -99,6 +102,7 @@ class _addOrderState extends State<addOrder> {
                   AppTextField(
                     title: 'الوصف',
                     hint: 'ادخل الوصف',
+
                     margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                     controller: descriptionController,
                   ),

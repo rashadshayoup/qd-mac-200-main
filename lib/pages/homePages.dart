@@ -41,7 +41,7 @@ class _homePagessState extends State<homePagess> {
     wallet(),
     setting(),
     deliveryPrices(),
-    search(),
+    // search(),
     branches(),
     tabsorder(),
   ];
@@ -170,33 +170,33 @@ class _homePagessState extends State<homePagess> {
                               ],
                             ),
                           ),
-                          MaterialButton(
-                            minWidth: 30,
-                            onPressed: () {
-                              setState(() {
-                                currenScreen = wallet();
-                                currentTab = 1;
-                              });
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.account_balance_wallet,
-                                  color: currentTab == 1 ? Themes.light.primaryColor : Colors.grey,
-                                ),
-                                Text(
-                                  "المحفظة",
-                                  style: GoogleFonts.cairo(
-                                      textStyle: TextStyle(
-                                    fontSize: _width < 321 ? 10 : 12,
-                                    fontWeight: currentTab == 1 ? FontWeight.bold : FontWeight.normal,
-                                    color: Themes.light_grey,
-                                  )),
-                                )
-                              ],
-                            ),
-                          ),
+                          // MaterialButton(
+                          //   minWidth: 30,
+                          //   onPressed: () {
+                          //     setState(() {
+                          //       currenScreen = wallet();
+                          //       currentTab = 1;
+                          //     });
+                          //   },
+                          //   child: Column(
+                          //     mainAxisAlignment: MainAxisAlignment.center,
+                          //     children: [
+                          //       Icon(
+                          //         Icons.account_balance_wallet,
+                          //         color: currentTab == 1 ? Themes.light.primaryColor : Colors.grey,
+                          //       ),
+                          //       Text(
+                          //         "المحفظة",
+                          //         style: GoogleFonts.cairo(
+                          //             textStyle: TextStyle(
+                          //           fontSize: _width < 321 ? 10 : 12,
+                          //           fontWeight: currentTab == 1 ? FontWeight.bold : FontWeight.normal,
+                          //           color: Themes.light_grey,
+                          //         )),
+                          //       )
+                          //     ],
+                          //   ),
+                          // ),
                           MaterialButton(
                             minWidth: 30,
                             onPressed: () {
@@ -270,25 +270,25 @@ class _homePagessState extends State<homePagess> {
           margin: EdgeInsets.all(5),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(50),
-            child: Image.asset(
-              api().urlIcon,
-              height: 40,
-              width: 40,
-              // fit: BoxFit.cover,
-            ),
+            // child: Image.asset(
+            //   api().urlIcon,
+            //   height: 40,
+            //   width: 40,
+            //   // fit: BoxFit.cover,
+            // ),
           )),
       actions: <Widget>[
-        IconButton(
-          icon: const Icon(
-            Icons.search_outlined,
-            size: 25,
-          ),
-          onPressed: () {
-            setState(() {
-              Navigator.pushNamed(context, 'search');
-            });
-          },
-        ),
+        // IconButton(
+        //   icon: const Icon(
+        //     Icons.search_outlined,
+        //     size: 25,
+        //   ),
+        //   onPressed: () {
+        //     setState(() {
+        //       Navigator.pushNamed(context, 'search');
+        //     });
+        //   },
+        // ),
 
         //    SizedBox(
         //   width: 20,
@@ -302,6 +302,7 @@ class _homePagessState extends State<homePagess> {
               bottomRight: Radius.circular(8.0),
               topLeft: Radius.circular(8.0),
               topRight: Radius.circular(8.0),
+
             ),
           ),
           onSelected: (result) {
@@ -320,7 +321,7 @@ class _homePagessState extends State<homePagess> {
           },
           itemBuilder: (ctx) => [
             _buildPopupMenuItem('إضافة طلبية', Icons.add, 0),
-            _buildPopupMenuItem('طلب مندوب توصيل', Icons.delivery_dining, 1),
+            // _buildPopupMenuItem('طلب مندوب توصيل', Icons.delivery_dining, 1),
           ],
         )
 

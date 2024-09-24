@@ -30,7 +30,7 @@ class _homeSuppliersState extends State<homeSuppliers> {
     order(),
     movements(),
     setting(),
-    search(),
+    // search(),
     branches(),
     tabsSup(),
   ];

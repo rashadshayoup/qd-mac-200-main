@@ -87,7 +87,7 @@ class _MyAppState extends State<MyApp> {
         "details_order": (context) => details_order(),
         "details_movements": (context) => details_movements(),
         "details_Suppliers": (context) => details_Suppliers(),
-        "search": (context) => search(),
+        // "search": (context) => search(),
       },
       home: login_tokon(),
     );

@@ -60,7 +60,7 @@ class _loginState extends State<login> {
                   children: [
                     Container(
                       margin: EdgeInsets.only(top: 20),
-                      child: Image.asset(api().urlIcon),
+                      // child: Image.asset(api().urlIcon),
                       height: 160,
                       width: 160,
                     ),
@@ -161,27 +161,27 @@ class _loginState extends State<login> {
                 ),
               ),
 
-              Container(
-                margin: EdgeInsets.only(top: 20, right: 20),
-                alignment: Alignment.centerRight,
-                child: GestureDetector(
-                  child: Text(
-                    "هل نسيت كلمة السر ؟",
-                    style: GoogleFonts.cairo(
-                        textStyle: TextStyle(
-                      color: _color == true
-                          ? Themes.dark_white
-                          : Themes.light_black,
-                    )),
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => sendEmail()),
-                    );
-                  },
-                ),
-              ),
+              // Container(
+              //   margin: EdgeInsets.only(top: 20, right: 20),
+              //   alignment: Alignment.centerRight,
+              //   child: GestureDetector(
+              //     child: Text(
+              //       "هل نسيت كلمة السر ؟",
+              //       style: GoogleFonts.cairo(
+              //           textStyle: TextStyle(
+              //         color: _color == true
+              //             ? Themes.dark_white
+              //             : Themes.light_black,
+              //       )),
+              //     ),
+              //     onTap: () {
+              //       Navigator.push(
+              //         context,
+              //         MaterialPageRoute(builder: (context) => sendEmail()),
+              //       );
+              //     },
+              //   ),
+              // ),
 
               Visibility(
                 visible: visible_login,
