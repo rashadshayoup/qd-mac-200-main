@@ -50,7 +50,7 @@ class _MyAppState extends State<MyApp> {
     } else {
       var role = _Storage.read("role").toString();
 
-      if (role == "2") {
+      if (role == "Representative") {
         return homeSuppliers();
       } else {
         return homePagess();

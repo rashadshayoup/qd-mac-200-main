@@ -3,6 +3,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:pro_delivery/coponents/darkMode.dart';
 import 'package:pro_delivery/pages/Movements.dart';
 import 'package:pro_delivery/pages/Order.dart';
+import 'package:pro_delivery/pages/OrderSuppliers.dart';
 import 'package:pro_delivery/pages/Setting.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pro_delivery/pages/Suppliers/SuppliersMain.dart';
@@ -59,8 +60,8 @@ class _tabsSupState extends State<tabsSup> {
         ),
         body: TabBarView(
           children: [
-            supMain(),
-            movements(),
+            OrderRepresentative(),
+            setting(),
 
             // Center(
             //   child: Text("It's cloudy here"),

@@ -8,6 +8,7 @@ import 'package:pro_delivery/pages/Branches.dart';
 import 'package:pro_delivery/pages/Delivery_Prices.dart';
 import 'package:pro_delivery/pages/Movements.dart';
 import 'package:pro_delivery/pages/Order.dart';
+import 'package:pro_delivery/pages/OrderSuppliers.dart';
 import 'package:pro_delivery/pages/Search.dart';
 import 'package:pro_delivery/pages/Setting.dart';
 import 'package:pro_delivery/pages/Suppliers/TabsSuppliers.dart';
@@ -27,7 +28,7 @@ class homeSuppliers extends StatefulWidget {
 class _homeSuppliersState extends State<homeSuppliers> {
   int currentTab = 0;
   final List<Widget> Pages = [
-    order(),
+    OrderRepresentative(),
     movements(),
     setting(),
     // search(),

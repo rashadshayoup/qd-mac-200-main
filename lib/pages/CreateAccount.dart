@@ -6,7 +6,6 @@ import 'package:pro_delivery/coponents/darkMode.dart';
 import 'package:pro_delivery/data/models/signUp_request_model.dart';
 import 'package:pro_delivery/network/config_network.dart';
 import 'package:pro_delivery/network/web_services.dart';
-import 'package:dio/dio.dart';
 import 'package:pro_delivery/widgets/button/button.dart';
 import 'dart:ui' as ui;
 import 'package:pro_delivery/widgets/text_field/text_field.dart';
