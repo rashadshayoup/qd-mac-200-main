@@ -41,4 +41,7 @@ abstract class WebServices {
   Future<void> changeOrderState({
     @Body() required ChangeStateRequestRequest request,
   });
+
+  @GET('/api/Order/GetWallet')
+  Future<OrderContent> wallet();
 }
