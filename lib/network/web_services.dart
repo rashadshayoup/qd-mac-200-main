@@ -34,4 +34,10 @@ abstract class WebServices {
 
   @POST('/api/Auth/SingUp')
   Future<void> signUp({@Body() required SignUpRequest request});
+
+
+  @GET('/api/Order/GetWallet')
+  Future<OrderContent> wallet();
+
+
 }
