@@ -60,8 +60,8 @@ class _tabsSupState extends State<tabsSup> {
         ),
         body: TabBarView(
           children: [
-            OrderRepresentative(),
-            setting(),
+            OrderRepresentative(pending: true),
+            OrderRepresentative(pending:false),
 
             // Center(
             //   child: Text("It's cloudy here"),

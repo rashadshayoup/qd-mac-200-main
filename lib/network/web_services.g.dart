@@ -14,7 +14,7 @@ class _WebServices implements WebServices {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'http://10.0.2.2:8888/';
+    baseUrl ??= 'http://10.0.2.2:5108/';
   }
 
   final Dio _dio;

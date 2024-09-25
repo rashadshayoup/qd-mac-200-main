@@ -8,7 +8,7 @@ import 'package:retrofit/retrofit.dart';
 
 part 'web_services.g.dart';
 
-@RestApi(baseUrl: 'http://10.0.2.2:8888/')
+@RestApi(baseUrl: 'http://10.0.2.2:5108/')
 abstract class WebServices {
   factory WebServices(Dio dio, {String? baseUrl}) = _WebServices;
 

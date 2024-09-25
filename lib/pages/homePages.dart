@@ -170,33 +170,33 @@ class _homePagessState extends State<homePagess> {
                               ],
                             ),
                           ),
-                          MaterialButton(
-                            minWidth: 30,
-                            onPressed: () {
-                              setState(() {
-                                currenScreen = wallet();
-                                currentTab = 1;
-                              });
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.account_balance_wallet,
-                                  color: currentTab == 1 ? Themes.light.primaryColor : Colors.grey,
-                                ),
-                                Text(
-                                  "المحفظة",
-                                  style: GoogleFonts.cairo(
-                                      textStyle: TextStyle(
-                                    fontSize: _width < 321 ? 10 : 12,
-                                    fontWeight: currentTab == 1 ? FontWeight.bold : FontWeight.normal,
-                                    color: Themes.light_grey,
-                                  )),
-                                )
-                              ],
-                            ),
-                          ),
+                          // MaterialButton(
+                          //   minWidth: 30,
+                          //   onPressed: () {
+                          //     setState(() {
+                          //       currenScreen = wallet();
+                          //       currentTab = 1;
+                          //     });
+                          //   },
+                          //   child: Column(
+                          //     mainAxisAlignment: MainAxisAlignment.center,
+                          //     children: [
+                          //       Icon(
+                          //         Icons.account_balance_wallet,
+                          //         color: currentTab == 1 ? Themes.light.primaryColor : Colors.grey,
+                          //       ),
+                          //       Text(
+                          //         "المحفظة",
+                          //         style: GoogleFonts.cairo(
+                          //             textStyle: TextStyle(
+                          //           fontSize: _width < 321 ? 10 : 12,
+                          //           fontWeight: currentTab == 1 ? FontWeight.bold : FontWeight.normal,
+                          //           color: Themes.light_grey,
+                          //         )),
+                          //       )
+                          //     ],
+                          //   ),
+                          // ),
                           MaterialButton(
                             minWidth: 30,
                             onPressed: () {

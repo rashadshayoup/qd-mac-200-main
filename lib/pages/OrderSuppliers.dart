@@ -21,9 +21,7 @@ class _orderState extends State<OrderRepresentative> {
   var _color = true;
   bool loading = false;
 
-  List<OrderModel> orders = [
-    OrderModel("1", "ملاحظة", 1, "0799999999", "عمان", 1, '', '', 1, 1, Representative('1', ''))
-  ];
+  List<OrderModel> orders = [];
 
   @override
   void initState() {
