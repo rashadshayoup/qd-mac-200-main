@@ -35,7 +35,7 @@ class AppButton extends StatelessWidget {
     this.fontColor,
     this.fontFamily,
     this.foregroundColor,
-    this.backgroundColor = const Color.fromARGB(255, 139, 36, 83),
+    this.backgroundColor = const Color(0xFF54a0ff),
     this.disabledBackgroundColor,
     this.radius = const BorderRadius.all(Radius.circular(6.0)),
     this.margin = EdgeInsets.zero,

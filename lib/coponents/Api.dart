@@ -34,6 +34,8 @@ class api {
 
   //// المحفظة
   var Wallet = "api/mobile/GetWalletActivities";
+  var WalletBalance = "api/Order/GetWallet";
+  // var WalletTransactions = "api/Order/GetOrderByCustomer";
 
   ///////انشاء حساب
   var Register = "api/Auth/SingUp?uri=";

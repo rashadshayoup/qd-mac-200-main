@@ -10,6 +10,7 @@ import 'package:pro_delivery/network/web_services.dart';
 
 class OrderRepresentative extends StatefulWidget {
   final bool pending;
+
   OrderRepresentative({Key? key, this.pending = true}) : super(key: key);
 
   @override
@@ -28,7 +29,7 @@ class _orderState extends State<OrderRepresentative> {
     super.initState();
     _color = _Storage.read("isDarkMode");
 
-    // order();
+    order();
   }
 
   @override
@@ -45,7 +46,8 @@ class _orderState extends State<OrderRepresentative> {
                     // margin: EdgeInsets.only(top: 25),
                     child: Center(
                         child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Themes.light.primaryColor),
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                          Themes.light.primaryColor),
                     )),
                   ))
                 : _getOrders.isEmpty
@@ -59,7 +61,9 @@ class _orderState extends State<OrderRepresentative> {
                             ),
                             Text(
                               "لا يوجد طلبات",
-                              style: GoogleFonts.cairo(fontSize: 20, color: Colors.grey.withOpacity(0.8)),
+                              style: GoogleFonts.cairo(
+                                  fontSize: 20,
+                                  color: Colors.grey.withOpacity(0.8)),
                             ),
                           ],
                         ),
@@ -78,21 +82,40 @@ class _orderState extends State<OrderRepresentative> {
   }
 
   List<OrderModel> get _getOrders => widget.pending
-      ? orders.where((e) => e.orderState == 1).toList()
-      : orders.where((e) => e.orderState != 1).toList();
+      ? orders.where((e) => e.orderState == 3).toList()
+      : orders.where((e) => e.orderState != 3).toList();
 
   _cardOrder(context, OrderModel order) {
     double _width = MediaQuery.of(context).size.width;
 
+    bool _actionsShown() {
+      if (order.orderState == OrderState.pending.value) {
+        return true;
+      }
+
+      if (order.orderState == OrderState.DeliveredToTheRepresentative.value) {
+        return true;
+      }
+
+      if (order.orderState == OrderState.Returning.value) {
+        return true;
+      }
+
+      return false;
+    }
+
     final _Storage = GetStorage();
     var _color = _Storage.read("isDarkMode");
+
     return Container(
       margin: EdgeInsets.fromLTRB(20, 20, 20, 12),
       width: double.infinity,
       decoration: BoxDecoration(
         color: _color == true ? Themes.dark_primary : Themes.light_white,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: _color == true ? Themes.dark_grey : Themes.light_white, width: 1),
+        border: Border.all(
+            color: _color == true ? Themes.dark_grey : Themes.light_white,
+            width: 1),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -113,7 +136,9 @@ class _orderState extends State<OrderRepresentative> {
                       textStyle: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
-                          color: _color == true ? Themes.dark_white : Themes.light_grey),
+                          color: _color == true
+                              ? Themes.dark_white
+                              : Themes.light_grey),
                     ),
                   ),
                   SizedBox(height: 2),
@@ -125,7 +150,9 @@ class _orderState extends State<OrderRepresentative> {
                       textStyle: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
-                          color: _color == true ? Themes.dark_white : Themes.light_grey),
+                          color: _color == true
+                              ? Themes.dark_white
+                              : Themes.light_grey),
                     ),
                   ),
                   Container(
@@ -135,7 +162,33 @@ class _orderState extends State<OrderRepresentative> {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.cairo(
-                        textStyle: TextStyle(fontSize: 12, color: _color == true ? Themes.dark_white : Colors.black),
+                        textStyle: TextStyle(
+                            fontSize: 12,
+                            color: _color == true
+                                ? Themes.dark_white
+                                : Colors.black),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: _width / 4,
+                    child: Text(
+                      'سعر الطلبية: ${order.orderPrice}',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: _width / 4,
+                    child: Text(
+                      'رقم المستلم',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 14,
                       ),
                     ),
                   ),
@@ -150,7 +203,9 @@ class _orderState extends State<OrderRepresentative> {
                         style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
-                            color: _color == true ? Themes.dark_white : Themes.light.primaryColor),
+                            color: _color == true
+                                ? Themes.dark_white
+                                : Themes.light.primaryColor),
                       ),
                     ),
                   ]),
@@ -164,14 +219,31 @@ class _orderState extends State<OrderRepresentative> {
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: _color == true ? Themes.dark_white : Themes.light.primaryColor),
+                          color: _color == true
+                              ? Themes.dark_white
+                              : Themes.light.primaryColor),
                     ),
                     Text(
                       " د.ل ",
                       style: GoogleFonts.cairo(
-                          textStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Themes.light_grey)),
+                          textStyle: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: Themes.light_grey)),
                     ),
                   ]),
+                  Container(
+                    width: 100,
+                    child: Text(
+                      'المدينة',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.cairo(
+                          textStyle: TextStyle(
+                              color: Themes.light_grey,
+                              fontWeight: FontWeight.bold)),
+                    ),
+                  ),
                   Container(
                     width: 100,
                     child: Text(
@@ -179,17 +251,36 @@ class _orderState extends State<OrderRepresentative> {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.cairo(
-                          textStyle: TextStyle(color: Themes.light_grey, fontWeight: FontWeight.bold)),
+                          textStyle: TextStyle(
+                              color: Themes.light_grey,
+                              fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Container(
+                    width: 100,
+                    child: Text(
+                      'حالة الطلبية',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.cairo(
+                          textStyle: TextStyle(
+                              color: Themes.light_grey,
+                              fontWeight: FontWeight.bold)),
                     ),
                   ),
                   Container(
                     width: 100,
                     child: Text(
-                      'الفرع',
+                      order.orderState.toOrderState.orderStatusName,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.cairo(
-                          textStyle: TextStyle(color: Themes.light_grey, fontWeight: FontWeight.bold)),
+                          textStyle: TextStyle(
+                              color: Themes.light_grey,
+                              fontWeight: FontWeight.bold)),
                     ),
                   ),
                 ]),
@@ -198,95 +289,98 @@ class _orderState extends State<OrderRepresentative> {
             SizedBox(
               height: 10,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                SizedBox(
-                  width: 10,
-                ),
-              ],
-            ),
+            if (_actionsShown()) Divider(),
             // add three InkWell with text for each state
             // Delivered = 1,
             //  Returning,
             //  ReturnInTheWarehouse
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                InkWell(
-                  onTap: () {
-                    changeState(order.orderNo, 1);
-                  },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    margin: EdgeInsets.only(top: 8),
-                    decoration: BoxDecoration(
-                        color: OrderState.Delivered.orderStatusColor.withOpacity(.1),
-                        borderRadius: BorderRadius.circular(4)),
-                    child: Text(
-                      OrderState.Delivered.orderStatusName,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.cairo(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12,
-                          textStyle: TextStyle(
-                            color: OrderState.Delivered.orderStatusColor,
-                          )),
+
+            if (_actionsShown())
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      changeState(order.orderNo, 1);
+                    },
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      margin: EdgeInsets.only(top: 8),
+                      decoration: BoxDecoration(
+                          color: OrderState.Delivered.orderStatusColor
+                              .withOpacity(.1),
+                          borderRadius: BorderRadius.circular(4)),
+                      child: Text(
+                        OrderState.Delivered.orderStatusName,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.cairo(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                            textStyle: TextStyle(
+                              color: OrderState.Delivered.orderStatusColor,
+                            )),
+                      ),
                     ),
                   ),
-                ),
-                InkWell(
-                  onTap: () {
-                    changeState(order.orderNo, 2);
-                  },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    margin: EdgeInsets.only(top: 8),
-                    decoration: BoxDecoration(
-                        color: OrderState.Returning.orderStatusColor.withOpacity(.1),
-                        borderRadius: BorderRadius.circular(4)),
-                    child: Text(
-                      OrderState.Returning.orderStatusName,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.cairo(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12,
-                          textStyle: TextStyle(
-                            color: OrderState.Returning.orderStatusColor,
-                          )),
+                  InkWell(
+                    onTap: () {
+                      changeState(order.orderNo, 2);
+                    },
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      margin: EdgeInsets.only(top: 8),
+                      decoration: BoxDecoration(
+                          color: OrderState.Returning.orderStatusColor
+                              .withOpacity(.1),
+                          borderRadius: BorderRadius.circular(4)),
+                      child: Text(
+                        OrderState.Returning.orderStatusName,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.cairo(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                            textStyle: TextStyle(
+                              color: OrderState.Returning.orderStatusColor,
+                            )),
+                      ),
                     ),
                   ),
-                ),
-                InkWell(
-                  onTap: () {
-                    changeState(order.orderNo, 3);
-                  },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    margin: EdgeInsets.only(top: 8),
-                    decoration: BoxDecoration(
-                        color: OrderState.ReturnInTheWarehouse.orderStatusColor.withOpacity(.1),
-                        borderRadius: BorderRadius.circular(4)),
-                    child: Text(
-                      OrderState.ReturnInTheWarehouse.orderStatusName,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.cairo(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12,
-                          textStyle: TextStyle(
-                            color: OrderState.ReturnInTheWarehouse.orderStatusColor,
-                          )),
+                  InkWell(
+                    onTap: () {
+                      changeState(order.orderNo, 3);
+                    },
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      margin: EdgeInsets.only(top: 8),
+                      decoration: BoxDecoration(
+                          color: OrderState
+                              .ReturnInTheWarehouse.orderStatusColor
+                              .withOpacity(.1),
+                          borderRadius: BorderRadius.circular(4)),
+                      child: Text(
+                        OrderState.ReturnInTheWarehouse.orderStatusName,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.cairo(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                            textStyle: TextStyle(
+                              color: OrderState
+                                  .ReturnInTheWarehouse.orderStatusColor,
+                            )),
+                      ),
                     ),
                   ),
-                ),
-              ],
-            )
+                ],
+              )
           ],
         ),
       ),
@@ -300,7 +394,8 @@ class _orderState extends State<OrderRepresentative> {
       setState(() {
         loading = true;
       });
-      var response = await WebServices(NetworkConfig.config()).getOrdersRepresentative();
+      var response =
+          await WebServices(NetworkConfig.config()).getOrdersRepresentative();
       orders = response.content;
 
       setState(() {
@@ -315,8 +410,9 @@ class _orderState extends State<OrderRepresentative> {
 
   Future<void> changeState(String orderNo, int orderState) async {
     try {
-      var response = await WebServices(NetworkConfig.config())
-          .changeOrderState(request: ChangeStateRequestRequest(orderNo: orderNo, orderState: orderState));
+      var response = await WebServices(NetworkConfig.config()).changeOrderState(
+          request: ChangeStateRequestRequest(
+              orderNo: orderNo, orderState: orderState));
 
       order();
     } catch (e) {}

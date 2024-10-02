@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,9 +8,11 @@ import 'package:pro_delivery/data/enums/order_status.dart';
 import 'package:pro_delivery/data/models/order_model.dart';
 import 'package:pro_delivery/network/config_network.dart';
 import 'package:pro_delivery/network/web_services.dart';
+import 'package:pro_delivery/pages/homePages.dart';
 
 class order extends StatefulWidget {
   final bool pending;
+
   order({Key? key, this.pending = true}) : super(key: key);
 
   @override
@@ -22,12 +26,26 @@ class _orderState extends State<order> {
 
   List<OrderModel> orders = [];
 
+  late final StreamSubscription<bool> _subscription;
+
   @override
   void initState() {
     super.initState();
     _color = _Storage.read("isDarkMode");
 
+    _subscription = OrderStream.instance.stream.listen((didAdd) {
+      if (!didAdd) return;
+
+      order();
+    });
+
     order();
+  }
+
+  @override
+  void dispose() {
+    _subscription.cancel();
+    super.dispose();
   }
 
   @override
@@ -44,7 +62,8 @@ class _orderState extends State<order> {
                     // margin: EdgeInsets.only(top: 25),
                     child: Center(
                         child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Themes.light.primaryColor),
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                          Themes.light.primaryColor),
                     )),
                   ))
                 : _getOrders.isEmpty
@@ -58,7 +77,9 @@ class _orderState extends State<order> {
                             ),
                             Text(
                               "لا يوجد طلبات",
-                              style: GoogleFonts.cairo(fontSize: 20, color: Colors.grey.withOpacity(0.8)),
+                              style: GoogleFonts.cairo(
+                                  fontSize: 20,
+                                  color: Colors.grey.withOpacity(0.8)),
                             ),
                           ],
                         ),
@@ -91,7 +112,9 @@ class _orderState extends State<order> {
       decoration: BoxDecoration(
         color: _color == true ? Themes.dark_primary : Themes.light_white,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: _color == true ? Themes.dark_grey : Themes.light_white, width: 1),
+        border: Border.all(
+            color: _color == true ? Themes.dark_grey : Themes.light_white,
+            width: 1),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -112,7 +135,9 @@ class _orderState extends State<order> {
                       textStyle: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
-                          color: _color == true ? Themes.dark_white : Themes.light_grey),
+                          color: _color == true
+                              ? Themes.dark_white
+                              : Themes.light_grey),
                     ),
                   ),
                   SizedBox(height: 2),
@@ -124,7 +149,9 @@ class _orderState extends State<order> {
                       textStyle: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
-                          color: _color == true ? Themes.dark_white : Themes.light_grey),
+                          color: _color == true
+                              ? Themes.dark_white
+                              : Themes.light_grey),
                     ),
                   ),
                   Container(
@@ -134,96 +161,127 @@ class _orderState extends State<order> {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.cairo(
-                        textStyle: TextStyle(fontSize: 12, color: _color == true ? Themes.dark_white : Colors.black),
+                        textStyle: TextStyle(
+                            fontSize: 12,
+                            color: _color == true
+                                ? Themes.dark_white
+                                : Colors.black),
                       ),
                     ),
                   ),
                   SizedBox(height: 10),
-                  Column(children: [
-                    Container(
-                      width: _width / 4,
-                      child: Text(
-                        order.recipientPhoneNo,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: _color == true ? Themes.dark_white : Themes.light.primaryColor),
-                      ),
-                    ),
-                  ]),
-                ]),
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Row(children: [
-                    Text(
-                      order.price.toString(),
+                  Container(
+                    width: _width / 4,
+                    child: Text(
+                      'سعر الطلبية: ${order.orderPrice}',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                          fontSize: 18,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: _width / 4,
+                    child: Text(
+                      'رقم المستلم',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: _width / 4,
+                    child: Text(
+                      order.recipientPhoneNo,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontSize: 14,
                           fontWeight: FontWeight.bold,
-                          color: _color == true ? Themes.dark_white : Themes.light.primaryColor),
-                    ),
-                    Text(
-                      " د.ل ",
-                      style: GoogleFonts.cairo(
-                          textStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Themes.light_grey)),
-                    ),
-                  ]),
-                  Container(
-                    width: 100,
-                    child: Text(
-                      order.recipientAddress,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.cairo(
-                          textStyle: TextStyle(color: Themes.light_grey, fontWeight: FontWeight.bold)),
+                          color: _color == true
+                              ? Themes.dark_white
+                              : Themes.light.primaryColor),
                     ),
                   ),
-                  Container(
-                    width: 100,
-                    child: Text(
-                      'الفرع',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.cairo(
-                          textStyle: TextStyle(color: Themes.light_grey, fontWeight: FontWeight.bold)),
+                ]),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(children: [
+                      Text(
+                        order.price.toString(),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: _color == true
+                                ? Themes.dark_white
+                                : Themes.light.primaryColor),
+                      ),
+                      Text(
+                        " د.ل ",
+                        style: GoogleFonts.cairo(
+                            textStyle: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: Themes.light_grey)),
+                      ),
+                    ]),
+                    Container(
+                      width: 100,
+                      child: Text(
+                        'المدينة',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.cairo(
+                            textStyle: TextStyle(
+                                color: Themes.light_grey,
+                                fontWeight: FontWeight.bold)),
+                      ),
                     ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    margin: EdgeInsets.only(top: 8),
-                    decoration: BoxDecoration(
-                        color: order.orderState.toOrderState.orderStatusColor.withOpacity(.1),
-                        borderRadius: BorderRadius.circular(4)),
-                    child: Text(
-                      order.orderState.toOrderState.orderStatusName,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.cairo(
+                    Container(
+                      width: 100,
+                      child: Text(
+                        order.recipientAddress,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.cairo(
+                            textStyle: TextStyle(
+                                color: Themes.light_grey,
+                                fontWeight: FontWeight.bold)),
+                      ),
+                    ),
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      margin: EdgeInsets.only(top: 8),
+                      decoration: BoxDecoration(
+                          color: order.orderState.toOrderState.orderStatusColor
+                              .withOpacity(.1),
+                          borderRadius: BorderRadius.circular(4)),
+                      child: Text(
+                        order.orderState.toOrderState.orderStatusName,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.cairo(
                           fontWeight: FontWeight.bold,
                           fontSize: 12,
                           textStyle: TextStyle(
-                            color: order.orderState.toOrderState.orderStatusColor,
-                          )),
-                    ),
-                  )
-                ]),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                SizedBox(
-                  width: 10,
+                            color:
+                                order.orderState.toOrderState.orderStatusColor,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
@@ -238,9 +296,9 @@ class _orderState extends State<order> {
         loading = true;
       });
       var response = await WebServices(NetworkConfig.config()).getOrders();
-      orders = response.content;
 
       setState(() {
+        orders = response.content;
         loading = false;
       });
     } catch (e) {

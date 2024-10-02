@@ -8,6 +8,7 @@ import 'package:pro_delivery/data/models/city_model.dart';
 import 'package:pro_delivery/network/config_network.dart';
 import 'package:pro_delivery/network/web_services.dart';
 import 'package:dio/dio.dart';
+import 'package:pro_delivery/pages/homePages.dart';
 import 'package:pro_delivery/widgets/button/button.dart';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
@@ -45,10 +46,8 @@ class _addOrderState extends State<addOrder> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
         backgroundColor: Themes.light_primary,
         appBar: _appBar(),
-
         body: Directionality(
             textDirection: ui.TextDirection.rtl,
             child: Form(
@@ -61,21 +60,26 @@ class _addOrderState extends State<addOrder> {
                       title: 'الفرع',
                       hintText: 'اختر الفرع',
                       isExpanded: true,
-                      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                      items: branche.map((e) => PickerModel(id: e.branchId, name: e.branchName)).toList(),
+                      margin:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      items: branche
+                          .map((e) =>
+                              PickerModel(id: e.branchId, name: e.branchName))
+                          .toList(),
                       onChanged: (value) {
                         setState(() {
                           branchId = value!;
                         });
 
                         getCities();
-
                       }),
                   AppPicker(
                       title: 'المدينة',
                       hintText: 'المدينة',
                       isExpanded: true,
-                      items: cities.map((e) => PickerModel(id: e.cityId, name: e.name)).toList(),
+                      items: cities
+                          .map((e) => PickerModel(id: e.cityId, name: e.name))
+                          .toList(),
                       onChanged: (value) {
                         setState(() {
                           cityId = value!;
@@ -102,16 +106,17 @@ class _addOrderState extends State<addOrder> {
                   AppTextField(
                     title: 'الوصف',
                     hint: 'ادخل الوصف',
-
                     margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                     controller: descriptionController,
                   ),
                   AppButton(
+
                       text: 'اضافة طلب',
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
                           add();
                         }
+
                       })
                 ])),
               ),
@@ -126,12 +131,12 @@ class _addOrderState extends State<addOrder> {
             margin: EdgeInsets.all(5),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(50),
-              child: Image.asset(
-                api().urlIcon,
-                height: 50,
-                width: 47,
-                fit: BoxFit.cover,
-              ),
+              // child: Image.asset(
+              //   api().urlIcon,
+              //   height: 50,
+              //   width: 47,
+              //   fit: BoxFit.cover,
+              // ),
             )),
       ],
     );
@@ -165,28 +170,38 @@ class _addOrderState extends State<addOrder> {
 
   ///////////////////////////api add ///////////////////////////////////////////////
   Future<void> add() async {
-    final webServices = WebServices(NetworkConfig.config());
-    final response = await webServices.addOrder(
+    try {
+      final webServices = WebServices(NetworkConfig.config());
+      await webServices.addOrder(
         branchId: branchId,
         cityId: cityId,
         recipientPhoneNo: recipientPhoneNo.text,
         orderPrice: orderPrice.text,
         countOfItems: countOfItems.text,
-        description: descriptionController.text);
+        description: descriptionController.text,
+      );
 
-    ScaffoldMessenger.of(context).clearSnackBars();
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        backgroundColor: Themes.showSnackBarColor,
-        content: Directionality(
-          textDirection: ui.TextDirection.rtl,
-          child: Text(
-            "تمت الاضافة بنجاح",
-            style: GoogleFonts.cairo(textStyle: TextStyle(fontSize: 14, color: Themes.light_white)),
+      OrderStream.instance.controller.add(true);
+
+      ScaffoldMessenger.of(context)
+        ..clearSnackBars()
+        ..showSnackBar(
+          SnackBar(
+            backgroundColor: Themes.showSnackBarColor,
+            content: Directionality(
+              textDirection: ui.TextDirection.rtl,
+              child: Text(
+                "تمت الاضافة بنجاح",
+                style: GoogleFonts.cairo(
+                    textStyle:
+                        TextStyle(fontSize: 14, color: Themes.light_white)),
+              ),
+            ),
           ),
-        )));
-    Navigator.pop(context);
+        );
 
-    try {} on SocketException {
+      Navigator.pop(context);
+    } on SocketException {
       ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           backgroundColor: Themes.showSnackBarColor,
@@ -194,9 +209,30 @@ class _addOrderState extends State<addOrder> {
             textDirection: ui.TextDirection.rtl,
             child: Text(
               "خطأ في الاتصال بالانترنت",
-              style: GoogleFonts.cairo(textStyle: TextStyle(fontSize: 14, color: Themes.light_white)),
+              style: GoogleFonts.cairo(
+                  textStyle:
+                      TextStyle(fontSize: 14, color: Themes.light_white)),
             ),
           )));
-    } catch (ex) {}
+    } catch (ex) {
+      ScaffoldMessenger.of(context)
+        ..clearSnackBars()
+        ..showSnackBar(
+          SnackBar(
+            backgroundColor: Themes.showSnackBarColor,
+            content: Directionality(
+              textDirection: ui.TextDirection.rtl,
+              child: Text(
+                "حدث خطأ ما",
+                style: GoogleFonts.cairo(
+                    textStyle:
+                        TextStyle(fontSize: 14, color: Themes.light_white)),
+              ),
+            ),
+          ),
+        );
+
+      Navigator.pop(context);
+    }
   }
 }

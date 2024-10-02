@@ -101,12 +101,12 @@ class _createAccountState extends State<createAccount> {
             margin: EdgeInsets.all(5),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(50),
-              child: Image.asset(
-                api().urlIcon,
-                height: 50,
-                width: 47,
-                fit: BoxFit.cover,
-              ),
+              // child: Image.asset(
+              //   api().urlIcon,
+              //   height: 50,
+              //   width: 47,
+              //   fit: BoxFit.cover,
+              // ),
             )),
       ],
     );

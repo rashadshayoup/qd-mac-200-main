@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -62,44 +64,21 @@ class _homePagessState extends State<homePagess> {
   String status = "";
   List<Object>? code = [""];
   var userId = "";
+
   // var fbm = FirebaseMessaging.instance;
   @override
   void initState() {
     super.initState();
     noios();
 
-    // WidgetsFlutterBinding.ensureInitialized();
-    // Firebase.initializeApp();
-
-    // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-//////////////////////
-
-    // fbm.getToken().then((value) => {print(value)});
-
     userId = _Storage.read("userId").toString();
 
     FirebaseMessaging.instance.subscribeToTopic(userId);
 
-    // final iOS = IOSInitializationSettings();
-    // final settings = InitializationSettings( iOS: iOS);
-
-    // NotificationApi.notificationDetails();
-    // NotificationApi.init();
-    // NotificationApi.showNotification();
-
     _color = _Storage.read("isDarkMode");
     token = _Storage.read("token");
-    // initSignalR();
-
-    // NotificationApi.init();
-
-    /////////
   }
 
-  // void listenNotification() =>
-  //     NotificationApi.onNotifications.stream.listen(onClickNotifications);
-  // void onClickNotifications(String? payload) =>   Navigator.pushNamed(context, 'details_movements',
-  //         arguments:  "" );
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
@@ -116,16 +95,19 @@ class _homePagessState extends State<homePagess> {
                 ? null
                 : FloatingActionButton(
                     backgroundColor: Themes.light.primaryColor,
-                    child: Icon(Icons.add, color: _color == true ? Colors.white : Colors.white),
-                    onPressed: () {
-                      // Workmanager().registerOneOffTask("1","taskName", constraints: Constraints(networkType: NetworkType.connected));
+                    child: Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    ),
+                    onPressed: () async {
+                      await Navigator.pushNamed(context, 'addOrder');
 
-                      setState(() {
-                        Navigator.pushNamed(context, 'addOrder');
-                      });
+                      // refresh page
+
                     },
                   ),
-            floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.startFloat,
             bottomNavigationBar: BottomAppBar(
               // color: _color ? Themes.dark_primary2 : Themes.light_white ,
               color: Themes.light_white,
@@ -156,47 +138,55 @@ class _homePagessState extends State<homePagess> {
                               children: [
                                 Icon(
                                   Icons.dashboard,
-                                  color: currentTab == 0 ? Themes.light.primaryColor : Themes.light_grey,
+                                  color: currentTab == 0
+                                      ? Themes.light.primaryColor
+                                      : Themes.light_grey,
                                 ),
                                 Text(
                                   "الطلبيات",
                                   style: GoogleFonts.cairo(
                                       textStyle: TextStyle(
                                     fontSize: _width < 321 ? 10 : 12,
-                                    fontWeight: currentTab == 0 ? FontWeight.bold : FontWeight.normal,
+                                    fontWeight: currentTab == 0
+                                        ? FontWeight.bold
+                                        : FontWeight.normal,
                                     color: Themes.light_grey,
                                   )),
                                 )
                               ],
                             ),
                           ),
-                          // MaterialButton(
-                          //   minWidth: 30,
-                          //   onPressed: () {
-                          //     setState(() {
-                          //       currenScreen = wallet();
-                          //       currentTab = 1;
-                          //     });
-                          //   },
-                          //   child: Column(
-                          //     mainAxisAlignment: MainAxisAlignment.center,
-                          //     children: [
-                          //       Icon(
-                          //         Icons.account_balance_wallet,
-                          //         color: currentTab == 1 ? Themes.light.primaryColor : Colors.grey,
-                          //       ),
-                          //       Text(
-                          //         "المحفظة",
-                          //         style: GoogleFonts.cairo(
-                          //             textStyle: TextStyle(
-                          //           fontSize: _width < 321 ? 10 : 12,
-                          //           fontWeight: currentTab == 1 ? FontWeight.bold : FontWeight.normal,
-                          //           color: Themes.light_grey,
-                          //         )),
-                          //       )
-                          //     ],
-                          //   ),
-                          // ),
+                          MaterialButton(
+                            minWidth: 30,
+                            onPressed: () {
+                              setState(() {
+                                currenScreen = wallet();
+                                currentTab = 1;
+                              });
+                            },
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.account_balance_wallet,
+                                  color: currentTab == 1
+                                      ? Themes.light.primaryColor
+                                      : Colors.grey,
+                                ),
+                                Text(
+                                  "المحفظة",
+                                  style: GoogleFonts.cairo(
+                                      textStyle: TextStyle(
+                                    fontSize: _width < 321 ? 10 : 12,
+                                    fontWeight: currentTab == 1
+                                        ? FontWeight.bold
+                                        : FontWeight.normal,
+                                    color: Themes.light_grey,
+                                  )),
+                                )
+                              ],
+                            ),
+                          ),
                           MaterialButton(
                             minWidth: 30,
                             onPressed: () {
@@ -210,14 +200,18 @@ class _homePagessState extends State<homePagess> {
                               children: [
                                 Icon(
                                   Icons.delivery_dining_sharp,
-                                  color: currentTab == 2 ? Themes.light.primaryColor : Colors.grey,
+                                  color: currentTab == 2
+                                      ? Themes.light.primaryColor
+                                      : Colors.grey,
                                 ),
                                 Text(
                                   "اسعار التوصيل",
                                   style: GoogleFonts.cairo(
                                       textStyle: TextStyle(
                                     fontSize: _width < 321 ? 10 : 12,
-                                    fontWeight: currentTab == 2 ? FontWeight.bold : FontWeight.normal,
+                                    fontWeight: currentTab == 2
+                                        ? FontWeight.bold
+                                        : FontWeight.normal,
                                     color: Themes.light_grey,
                                   )),
                                 )
@@ -237,14 +231,18 @@ class _homePagessState extends State<homePagess> {
                               children: [
                                 Icon(
                                   Icons.settings,
-                                  color: currentTab == 3 ? Themes.light.primaryColor : Colors.grey,
+                                  color: currentTab == 3
+                                      ? Themes.light.primaryColor
+                                      : Colors.grey,
                                 ),
                                 Text(
                                   "الإعدادات",
                                   style: GoogleFonts.cairo(
                                       textStyle: TextStyle(
                                     fontSize: _width < 321 ? 10 : 12,
-                                    fontWeight: currentTab == 3 ? FontWeight.bold : FontWeight.normal,
+                                    fontWeight: currentTab == 3
+                                        ? FontWeight.bold
+                                        : FontWeight.normal,
                                     color: Themes.light_grey,
                                   )),
                                 )
@@ -302,7 +300,6 @@ class _homePagessState extends State<homePagess> {
               bottomRight: Radius.circular(8.0),
               topLeft: Radius.circular(8.0),
               topRight: Radius.circular(8.0),
-
             ),
           ),
           onSelected: (result) {
@@ -352,7 +349,10 @@ class _homePagessState extends State<homePagess> {
             ),
             Text(title,
                 style: GoogleFonts.cairo(
-                    textStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Themes.light.primaryColor))),
+                    textStyle: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Themes.light.primaryColor))),
           ],
         ),
       ),
@@ -411,7 +411,8 @@ class _homePagessState extends State<homePagess> {
   //   });
   // }
 
-  Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  Future<void> _firebaseMessagingBackgroundHandler(
+      RemoteMessage message) async {
     await Firebase.initializeApp();
     print('Handling a background message ${message.messageId}');
   }
@@ -431,10 +432,21 @@ class _homePagessState extends State<homePagess> {
 
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
       print('User granted permission');
-    } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
+    } else if (settings.authorizationStatus ==
+        AuthorizationStatus.provisional) {
       print('User granted provisional permission');
     } else {
       print('User declined or has not accepted permission');
     }
   }
+}
+
+class OrderStream {
+  static final OrderStream instance = OrderStream._();
+
+  OrderStream._();
+
+  final StreamController<bool> controller = StreamController<bool>.broadcast();
+
+  Stream<bool> get stream => controller.stream;
 }

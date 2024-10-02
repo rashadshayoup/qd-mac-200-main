@@ -46,84 +46,7 @@ class _settingState extends State<setting> {
         backgroundColor: _value ? Themes.dark_primary : Themes.light_primary,
         body: Column(
           children: [
-            Container(
-              margin: EdgeInsets.fromLTRB(20, 25, 20, 5),
-              height: 100,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color:
-                    _value == true ? Themes.dark_primary : Themes.light_white,
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                    color:
-                        _value == true ? Themes.dark_grey : Themes.light_white,
-                    width: 1),
-              ),
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: 150,
-                          child: Text(
-                            "الألوان الليلية",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: GoogleFonts.cairo(
-                                textStyle: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: _value == true
-                                        ? Themes.dark_white
-                                        : Themes.light.primaryColor)),
-                          ),
-                        ),
-                        Container(
-                          height: 35,
-                          child: Transform.scale(
-                            scale: 1,
-                            child: Switch(
-                              value: _value,
-                              activeColor: Themes.light.primaryColor,
-                              onChanged: (bool value) {
-                                setState(() {
-                                  _value = value;
 
-                                  _Storage.write("isDarkMode", _value);
-                                });
-                              },
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      width: double.infinity,
-                      child: Text(
-                        "إذا كنت تفضل الالوان الليلية فعل هذا الخيار",
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: GoogleFonts.cairo(
-                            textStyle: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.bold,
-                                color: Themes.light_grey)),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
             GestureDetector(
               onTap: () {
                 Navigator.pushReplacement(
@@ -255,7 +178,7 @@ class _settingState extends State<setting> {
                           Container(
                             width: 150,
                             child: Text(
-                              "حذف الحساب",
+                              "تغيير كلمة المرور ",
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: GoogleFonts.cairo(
@@ -272,7 +195,7 @@ class _settingState extends State<setting> {
                             child: Transform.scale(
                               scale: 1,
                               child: Icon(
-                                Icons.delete,
+                                Icons.change_circle_outlined,
                                 color: Themes.light.primaryColor,
                               ),
                             ),

@@ -17,13 +17,13 @@ class _tabsorderState extends State<tabsorder> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      initialIndex:  0,
+      initialIndex: 0,
       length: 2,
       child: Scaffold(
         appBar: AppBar(
           // title: const Text('TabBar Widget'),
           backgroundColor: Themes.light.primaryColor,
-           elevation: 0,
+          elevation: 0,
           toolbarHeight: 0,
           bottom: TabBar(
             indicator: UnderlineTabIndicator(
@@ -35,20 +35,23 @@ class _tabsorderState extends State<tabsorder> {
                 child: Text(
                   'قيد الإنتظار',
                   style: GoogleFonts.cairo(
-                      textStyle: TextStyle(fontWeight: FontWeight.bold)),
+                    textStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
-                // icon: Icon(Icons.cloud_outlined),
-                // text: 'قيد الإنتظار',
               ),
               Tab(
                 child: Text(
                   'تحت الإجراء',
                   style: GoogleFonts.cairo(
-                      textStyle: TextStyle(fontWeight: FontWeight.bold)),
+                    textStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
-
-                // icon: Icon(Icons.beach_access_sharp),
-                // text: 'تحت الإجراء',
               ),
             ],
           ),
@@ -56,7 +59,9 @@ class _tabsorderState extends State<tabsorder> {
         body: TabBarView(
           children: [
             order(),
-            order(pending: false,),
+            order(
+              pending: false,
+            ),
 
             // Center(
             //   child: Text("It's cloudy here"),
@@ -65,9 +70,7 @@ class _tabsorderState extends State<tabsorder> {
             //   child: Text("It's rainy here"),
             // ),
           ],
-          
         ),
-        
       ),
     );
   }

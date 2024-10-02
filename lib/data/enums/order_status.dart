@@ -7,8 +7,8 @@ enum OrderState {
   Delivered(4),
   Returning(5),
   ReturnInTheWarehouse(6),
-  DeliveredNdClosed(8),
-  ReturnNdClosed(9);
+  ClosedDelivered(7),
+  DeliveredNdClosed(8);
 
   const OrderState(this.value);
   final int value;
@@ -22,17 +22,17 @@ extension OrderStateExtension on OrderState {
       case OrderState.InTheWarehouse:
         return 'في المخزن';
       case OrderState.DeliveredToTheRepresentative:
-        return 'تم تسليمه للمندوب';
+        return 'لدى للمندوب';
       case OrderState.Delivered:
         return 'تم التسليم';
       case OrderState.Returning:
         return 'قيد الاسترجاع';
       case OrderState.ReturnInTheWarehouse:
         return 'في المخزن';
+      case OrderState. ClosedDelivered:
+        return 'تم التسليم - مغلق';
       case OrderState.DeliveredNdClosed:
-        return 'تم التسليم ومغلق';
-      case OrderState.ReturnNdClosed:
-        return 'تم الاسترجاع ومغلق';
+        return 'راجع - مغلق';
     }
   }
 
@@ -50,10 +50,10 @@ extension OrderStateExtension on OrderState {
         return Color(0xff0438b6);
       case OrderState.ReturnInTheWarehouse:
         return Color(0xff6c0163);
+      case OrderState.ClosedDelivered:
+        return Color(0xffcb7c06);
       case OrderState.DeliveredNdClosed:
         return Color(0xff96014f);
-      case OrderState.ReturnNdClosed:
-        return Color(0xffcb7c06);
     }
   }
 
@@ -75,10 +75,10 @@ extension OrderStateExtensionInt on int {
         return OrderState.Returning;
       case 6:
         return OrderState.ReturnInTheWarehouse;
+      case 7:
+        return OrderState.ClosedDelivered;
       case 8:
         return OrderState.DeliveredNdClosed;
-      case 9:
-        return OrderState.ReturnNdClosed;
       default:
         throw Exception('Invalid OrderState');
     }

@@ -8,9 +8,6 @@ import 'package:pro_delivery/pages/Setting.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pro_delivery/pages/Suppliers/SuppliersMain.dart';
 
-
-
-
 class tabsSup extends StatefulWidget {
   tabsSup({Key? key}) : super(key: key);
 
@@ -22,13 +19,13 @@ class _tabsSupState extends State<tabsSup> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      initialIndex:  0,
+      initialIndex: 0,
       length: 2,
       child: Scaffold(
         appBar: AppBar(
           // title: const Text('TabBar Widget'),
           backgroundColor: Themes.light.primaryColor,
-           elevation: 0,
+          elevation: 0,
           toolbarHeight: 0,
           bottom: TabBar(
             indicator: UnderlineTabIndicator(
@@ -40,7 +37,11 @@ class _tabsSupState extends State<tabsSup> {
                 child: Text(
                   'تحت الإجراء',
                   style: GoogleFonts.cairo(
-                      textStyle: TextStyle(fontWeight: FontWeight.bold)),
+                    textStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
                 // icon: Icon(Icons.cloud_outlined),
                 // text: 'قيد الإنتظار',
@@ -49,7 +50,11 @@ class _tabsSupState extends State<tabsSup> {
                 child: Text(
                   'كل الطرود',
                   style: GoogleFonts.cairo(
-                      textStyle: TextStyle(fontWeight: FontWeight.bold)),
+                    textStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
 
                 // icon: Icon(Icons.beach_access_sharp),
@@ -61,7 +66,7 @@ class _tabsSupState extends State<tabsSup> {
         body: TabBarView(
           children: [
             OrderRepresentative(pending: true),
-            OrderRepresentative(pending:false),
+            OrderRepresentative(pending: false),
 
             // Center(
             //   child: Text("It's cloudy here"),
@@ -70,9 +75,7 @@ class _tabsSupState extends State<tabsSup> {
             //   child: Text("It's rainy here"),
             // ),
           ],
-          
         ),
-        
       ),
     );
   }
