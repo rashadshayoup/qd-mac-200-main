@@ -103,7 +103,6 @@ class _homePagessState extends State<homePagess> {
                       await Navigator.pushNamed(context, 'addOrder');
 
                       // refresh page
-
                     },
                   ),
             floatingActionButtonLocation:
@@ -115,144 +114,138 @@ class _homePagessState extends State<homePagess> {
               notchMargin: 0,
               child: Directionality(
                 textDirection: TextDirection.rtl,
-                child: Container(
-                  height: 60,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      SingleChildScrollView(
-                          child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+
+                  children: [
+                    MaterialButton(
+                      padding: EdgeInsets.zero,
+                      onPressed: () {
+                        setState(() {
+                          _Storage.write("currenScreen", "0");
+                          currenScreen = tabsorder();
+                          currentTab = 0;
+                        });
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          MaterialButton(
-                            minWidth: 30,
-                            onPressed: () {
-                              setState(() {
-                                _Storage.write("currenScreen", "0");
-                                currenScreen = tabsorder();
-                                currentTab = 0;
-                              });
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.dashboard,
-                                  color: currentTab == 0
-                                      ? Themes.light.primaryColor
-                                      : Themes.light_grey,
-                                ),
-                                Text(
-                                  "الطلبيات",
-                                  style: GoogleFonts.cairo(
-                                      textStyle: TextStyle(
-                                    fontSize: _width < 321 ? 10 : 12,
-                                    fontWeight: currentTab == 0
-                                        ? FontWeight.bold
-                                        : FontWeight.normal,
-                                    color: Themes.light_grey,
-                                  )),
-                                )
-                              ],
-                            ),
+                          Icon(
+                            Icons.dashboard,
+                            color: currentTab == 0
+                                ? Themes.light.primaryColor
+                                : Themes.light_grey,
                           ),
-                          MaterialButton(
-                            minWidth: 30,
-                            onPressed: () {
-                              setState(() {
-                                currenScreen = wallet();
-                                currentTab = 1;
-                              });
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.account_balance_wallet,
-                                  color: currentTab == 1
-                                      ? Themes.light.primaryColor
-                                      : Colors.grey,
-                                ),
-                                Text(
-                                  "المحفظة",
-                                  style: GoogleFonts.cairo(
-                                      textStyle: TextStyle(
-                                    fontSize: _width < 321 ? 10 : 12,
-                                    fontWeight: currentTab == 1
-                                        ? FontWeight.bold
-                                        : FontWeight.normal,
-                                    color: Themes.light_grey,
-                                  )),
-                                )
-                              ],
-                            ),
-                          ),
-                          MaterialButton(
-                            minWidth: 30,
-                            onPressed: () {
-                              setState(() {
-                                currenScreen = deliveryPrices();
-                                currentTab = 2;
-                              });
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.delivery_dining_sharp,
-                                  color: currentTab == 2
-                                      ? Themes.light.primaryColor
-                                      : Colors.grey,
-                                ),
-                                Text(
-                                  "اسعار التوصيل",
-                                  style: GoogleFonts.cairo(
-                                      textStyle: TextStyle(
-                                    fontSize: _width < 321 ? 10 : 12,
-                                    fontWeight: currentTab == 2
-                                        ? FontWeight.bold
-                                        : FontWeight.normal,
-                                    color: Themes.light_grey,
-                                  )),
-                                )
-                              ],
-                            ),
-                          ),
-                          MaterialButton(
-                            minWidth: 30,
-                            onPressed: () {
-                              setState(() {
-                                currenScreen = setting();
-                                currentTab = 3;
-                              });
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.settings,
-                                  color: currentTab == 3
-                                      ? Themes.light.primaryColor
-                                      : Colors.grey,
-                                ),
-                                Text(
-                                  "الإعدادات",
-                                  style: GoogleFonts.cairo(
-                                      textStyle: TextStyle(
-                                    fontSize: _width < 321 ? 10 : 12,
-                                    fontWeight: currentTab == 3
-                                        ? FontWeight.bold
-                                        : FontWeight.normal,
-                                    color: Themes.light_grey,
-                                  )),
-                                )
-                              ],
-                            ),
-                          ),
+                          Text(
+                            "الطلبيات",
+                            style: GoogleFonts.cairo(
+                                textStyle: TextStyle(
+                                  fontSize: _width < 321 ? 10 : 11,
+                                  fontWeight: currentTab == 0
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
+                                  color: Themes.light_grey,
+                                )),
+                          )
                         ],
-                      ))
-                    ],
-                  ),
+                      ),
+                    ),
+                    MaterialButton(
+                      padding: EdgeInsets.zero,
+
+                      onPressed: () {
+                        setState(() {
+                          currenScreen = wallet();
+                          currentTab = 1;
+                        });
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.account_balance_wallet,
+                            color: currentTab == 1
+                                ? Themes.light.primaryColor
+                                : Colors.grey,
+                          ),
+                          Text(
+                            "المحفظة",
+                            style: GoogleFonts.cairo(
+                                textStyle: TextStyle(
+                                  fontSize: _width < 321 ? 10 : 11,
+                                  fontWeight: currentTab == 1
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
+                                  color: Themes.light_grey,
+                                )),
+                          )
+                        ],
+                      ),
+                    ),
+                    MaterialButton(
+                      padding: EdgeInsets.zero,
+
+                      onPressed: () {
+                        setState(() {
+                          currenScreen = deliveryPrices();
+                          currentTab = 2;
+                        });
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.delivery_dining_sharp,
+                            color: currentTab == 2
+                                ? Themes.light.primaryColor
+                                : Colors.grey,
+                          ),
+                          Text(
+                            "اسعار التوصيل",
+                            style: GoogleFonts.cairo(
+                                textStyle: TextStyle(
+                                  fontSize: _width < 321 ? 10 : 11,
+                                  fontWeight: currentTab == 2
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
+                                  color: Themes.light_grey,
+                                )),
+                          )
+                        ],
+                      ),
+                    ),
+                    MaterialButton(
+
+                      onPressed: () {
+                        setState(() {
+                          currenScreen = setting();
+                          currentTab = 3;
+                        });
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.settings,
+                            color: currentTab == 3
+                                ? Themes.light.primaryColor
+                                : Colors.grey,
+                          ),
+                          Text(
+                            "الإعدادات",
+                            style: GoogleFonts.cairo(
+                                textStyle: TextStyle(
+                                  fontSize: _width < 321 ? 10 : 11,
+                                  fontWeight: currentTab == 3
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
+                                  color: Themes.light_grey,
+                                )),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
             )));

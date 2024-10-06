@@ -2,7 +2,7 @@
     package="com.eslam.delivery">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="QdL"
+        android:label="وصل طلبك"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         

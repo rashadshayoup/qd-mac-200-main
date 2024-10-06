@@ -9,11 +9,10 @@ class OrderContent {
 
   OrderContent(this.content);
 
-  factory OrderContent.fromJson(Map<String, dynamic> json) => _$OrderContentFromJson(json);
+  factory OrderContent.fromJson(Map<String, dynamic> json) =>
+      _$OrderContentFromJson(json);
   Map<String, dynamic> toJson() => _$OrderContentToJson(this);
 }
-
-
 
 @JsonSerializable()
 class OrderModel {
@@ -31,30 +30,38 @@ class OrderModel {
   final int countOfItems;
   @JsonKey(name: "senderPhoneNo", defaultValue: '')
   final String senderPhoneNo;
+  @JsonKey(name: "createdAt", defaultValue: '')
+  final String createdAt;
+  @JsonKey(name: "updatedAt", defaultValue: '')
+  final String updatedAt;
   @JsonKey(name: "recipientPhoneNo", defaultValue: '')
   final String recipientPhoneNo;
   @JsonKey(name: "price", defaultValue: 0)
   final double price;
   @JsonKey(name: "orderPrice", defaultValue: 0)
   final double orderPrice;
-  @JsonKey(name: "representative",)
+  @JsonKey(
+    name: "representative",
+  )
   final Representative? representative;
 
   OrderModel(
-    this.orderId,
-    this.orderNo,
-    this.orderState,
-    this.description,
-    this.recipientAddress,
-    this.countOfItems,
-    this.senderPhoneNo,
-    this.recipientPhoneNo,
-    this.price,
-    this.orderPrice,
-    this.representative,
-  );
+      this.orderId,
+      this.orderNo,
+      this.orderState,
+      this.description,
+      this.recipientAddress,
+      this.countOfItems,
+      this.senderPhoneNo,
+      this.recipientPhoneNo,
+      this.price,
+      this.orderPrice,
+      this.representative,
+      this.createdAt,
+      this.updatedAt);
 
-  factory OrderModel.fromJson(Map<String, dynamic> json) => _$OrderModelFromJson(json);
+  factory OrderModel.fromJson(Map<String, dynamic> json) =>
+      _$OrderModelFromJson(json);
   Map<String, dynamic> toJson() => _$OrderModelToJson(this);
 }
 
@@ -67,6 +74,7 @@ class Representative {
 
   Representative(this.name, this.phoneNumber);
 
-  factory Representative.fromJson(Map<String, dynamic> json) => _$RepresentativeFromJson(json);
+  factory Representative.fromJson(Map<String, dynamic> json) =>
+      _$RepresentativeFromJson(json);
   Map<String, dynamic> toJson() => _$RepresentativeToJson(this);
 }

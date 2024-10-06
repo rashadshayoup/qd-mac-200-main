@@ -10,6 +10,8 @@ class NetworkConfig {
         connectTimeout: const Duration(seconds: 60),
         receiveTimeout: const Duration(seconds: 60),
         responseType: ResponseType.json,
+        followRedirects: false,
+
         contentType: 'application/json'));
 
     dio.interceptors.add(AuthInterceptor());

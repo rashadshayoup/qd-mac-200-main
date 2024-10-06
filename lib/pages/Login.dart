@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pro_delivery/coponents/Api.dart';
 import 'package:pro_delivery/coponents/darkMode.dart';
 import 'package:pro_delivery/pages/CreateAccount.dart';
-import 'package:pro_delivery/pages/SendEmail.dart';
 import 'package:pro_delivery/pages/Suppliers/homeSuppliers.dart';
 import 'package:pro_delivery/pages/homePages.dart';
 import 'package:http/http.dart' as http;
@@ -108,7 +107,7 @@ class _loginState extends State<login> {
                   ),
                   validator: (Value) {
                     if (Value!.isEmpty) {
-                      return "yyy";
+                      return "الرجاء إدخال اسم المستخدم";
                     }
                   },
                 ),
@@ -130,7 +129,7 @@ class _loginState extends State<login> {
                   ),
                   validator: (Value) {
                     if (Value!.isEmpty) {
-                      return "Password must not be empty";
+                      return "الرجاء إدخال كلمة المرور";
                     }
                   },
                   obscureText: hidePass,
@@ -275,7 +274,8 @@ class _loginState extends State<login> {
     try {
       visible_login = false;
       if (emailController.text.isNotEmpty && passController.text.isNotEmpty) {
-        var urlLogin = Uri.parse(api().url +
+        var urlLogin = Uri.parse(
+            api().url +
             api().login +
             "UserName=" +
             emailController.text +

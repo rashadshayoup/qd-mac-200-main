@@ -50,36 +50,48 @@ class _createAccountState extends State<createAccount> {
                     hint: 'أدخل الأسم',
                     margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                     controller: First_name,
+                    required: true,
                   ),
                   AppTextField(
                     title: 'اللقب',
                     hint: 'أدخل اللقب',
                     margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                     controller: Last_name,
+                    required: true,
                   ),
                   AppTextField(
                     title: 'العنوان',
                     hint: 'أدخل العنوان',
                     margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                     controller: address,
+                    required: true,
                   ),
                   AppTextField(
                     title: 'أسم المستخدم',
                     hint: 'ادخل أسم المستخدم',
                     margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                     controller: User_Name,
+                    required: true,
                   ),
                   AppTextField(
                     title: 'رقم الهاتف',
                     hint: 'أدخل رقم الهاتف',
                     margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                     controller: phone,
+                    onValidate: (v) {
+                      RegExp regex = RegExp(r'^09\d{8}$');
+                      if (!regex.hasMatch(v ?? '')) {
+                        return 'يجب أن يتكون رقم الهاتف من 10 أرقام ويبدأ بـ09';
+                      }
+                      return null;
+                    },
                   ),
                   AppTextField(
                     title: 'الرقم السري',
                     hint: 'أدخل الرقم السري',
                     margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                     controller: password,
+                    required: true,
                   ),
                   AppButton(
                       text: 'اضافة طلب',
@@ -114,30 +126,32 @@ class _createAccountState extends State<createAccount> {
 
   ///////////////////////////api add ///////////////////////////////////////////////
   Future<void> add() async {
-    final webServices = WebServices(NetworkConfig.config());
-    final response = await webServices.signUp(
-        request: SignUpRequest(
-      firstName: First_name.text,
-      lastName: Last_name.text,
-      address: address.text,
-      userName: User_Name.text,
-      phoneNumber: phone.text,
-      password: password.text,
-    ));
+    try {
+      final webServices = WebServices(NetworkConfig.config());
+      final response = await webServices.signUp(
+          request: SignUpRequest(
+        firstName: First_name.text,
+        lastName: Last_name.text,
+        address: address.text,
+        userName: User_Name.text,
+        phoneNumber: phone.text,
+        password: password.text,
+      ));
 
-    ScaffoldMessenger.of(context).clearSnackBars();
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        backgroundColor: Themes.showSnackBarColor,
-        content: Directionality(
-          textDirection: ui.TextDirection.rtl,
-          child: Text(
-            "تم عمل حساب بنجاح",
-            style: GoogleFonts.cairo(textStyle: TextStyle(fontSize: 14, color: Themes.light_white)),
-          ),
-        )));
-    Navigator.pop(context);
-
-    try {} on SocketException {
+      ScaffoldMessenger.of(context).clearSnackBars();
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: Themes.showSnackBarColor,
+          content: Directionality(
+            textDirection: ui.TextDirection.rtl,
+            child: Text(
+              "تم عمل حساب بنجاح",
+              style: GoogleFonts.cairo(
+                  textStyle:
+                      TextStyle(fontSize: 14, color: Themes.light_white)),
+            ),
+          )));
+      Navigator.pop(context);
+    } on SocketException {
       ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           backgroundColor: Themes.showSnackBarColor,
@@ -145,9 +159,13 @@ class _createAccountState extends State<createAccount> {
             textDirection: ui.TextDirection.rtl,
             child: Text(
               "خطأ في الاتصال بالانترنت",
-              style: GoogleFonts.cairo(textStyle: TextStyle(fontSize: 14, color: Themes.light_white)),
+              style: GoogleFonts.cairo(
+                  textStyle:
+                      TextStyle(fontSize: 14, color: Themes.light_white)),
             ),
           )));
-    } catch (ex) {}
+    } catch (ex) {
+      print(ex);
+    }
   }
 }

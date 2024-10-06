@@ -29,7 +29,6 @@ class AppTextField extends StatefulWidget {
   final List<TextInputFormatter>? inputFormatters;
   final bool showValid;
   final String error;
-  final String? fontFamily;
   final Color backgroundColor;
   final Color borderColor;
   final BorderRadius? borderRadius;
@@ -68,7 +67,6 @@ class AppTextField extends StatefulWidget {
       this.isPasswordField = false,
       this.showValid = false,
       this.error = '',
-      this.fontFamily = '',
       this.prefixIcon,
       this.required = true,
       this.prefixIconSize,
@@ -90,7 +88,8 @@ class AppTextField extends StatefulWidget {
   CoreTextFieldState createState() => CoreTextFieldState();
 }
 
-class CoreTextFieldState extends State<AppTextField> with AutomaticKeepAliveClientMixin {
+class CoreTextFieldState extends State<AppTextField>
+    with AutomaticKeepAliveClientMixin {
   var hidePassword = true;
   var errorVisibility = false;
   var isHovered = false;
@@ -102,7 +101,8 @@ class CoreTextFieldState extends State<AppTextField> with AutomaticKeepAliveClie
     super.initState();
     if (widget.initialValue != null) {
       controller.text = widget.initialValue!;
-      controller.selection = TextSelection.fromPosition(TextPosition(offset: controller.text.length));
+      controller.selection = TextSelection.fromPosition(
+          TextPosition(offset: controller.text.length));
       _focus.addListener(_onFocusChange);
     }
   }
@@ -119,7 +119,8 @@ class CoreTextFieldState extends State<AppTextField> with AutomaticKeepAliveClie
     super.build(context);
     if (widget.initialValue != null) {
       controller.text = widget.initialValue!;
-      controller.selection = TextSelection.fromPosition(TextPosition(offset: controller.text.length));
+      controller.selection = TextSelection.fromPosition(
+          TextPosition(offset: controller.text.length));
     }
     if (!widget.isVisible) {
       controller.text = '';
@@ -186,7 +187,7 @@ class CoreTextFieldState extends State<AppTextField> with AutomaticKeepAliveClie
                 validator: widget.onValidate ??
                     (value) {
                       if (widget.required && (value == null || value.isEmpty)) {
-                        return 'This field is required';
+                        return 'هذا الحقل مطلوب';
                       }
                       return null;
                     },
@@ -194,13 +195,14 @@ class CoreTextFieldState extends State<AppTextField> with AutomaticKeepAliveClie
                 cursorColor: Colors.grey,
                 style: widget.style ??
                     TextStyle(
-                      fontFamily: widget.fontFamily,
                       fontSize: widget.fontSize ?? 16,
                       fontWeight: FontWeight.w500,
                     ),
                 decoration: widget.decoration ??
                     InputDecoration(
-                        contentPadding: widget.padding ?? EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+                        errorMaxLines: 2,
+                        contentPadding: widget.padding ??
+                            EdgeInsets.symmetric(vertical: 2, horizontal: 8),
                         counterText: '',
                         border: InputBorder.none,
                         filled: true,
@@ -208,44 +210,65 @@ class CoreTextFieldState extends State<AppTextField> with AutomaticKeepAliveClie
                         fillColor: Colors.white,
                         hoverColor: Colors.white,
                         prefixIcon: hasPrefixIcon
-                            ? _PrefixIcon(icon: widget.prefixIcon, color: widget.prefixIconColor, size: 16)
+                            ? _PrefixIcon(
+                                icon: widget.prefixIcon,
+                                color: widget.prefixIconColor,
+                                size: 16)
                             : null,
                         prefixIconColor: widget.prefixIconColor,
                         suffixIcon: _SuffixIcon(
                           obscureText: widget.isPasswordField,
                           visibility: hidePassword,
                           showValid: widget.showValid,
-                          icon: widget.suffixIcon ?? SizedBox.shrink(),
+                          icon: widget.suffixIcon ??
+                              (widget.isPasswordField
+                                  ? Icon(hidePassword
+                                      ? Icons.visibility_off
+                                      : Icons.visibility)
+                                  : SizedBox.shrink()),
                           size: 10,
-                          onTouch: () => setState(() => hidePassword = !hidePassword),
+                          onTouch: () =>
+                              setState(() => hidePassword = !hidePassword),
                         ),
                         disabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
-                          borderSide: const BorderSide(color: Colors.red, width: 0.0),
+                          borderSide:
+                              const BorderSide(color: Colors.red, width: 0.0),
                         ),
                         enabledBorder: OutlineInputBorder(
-                          borderRadius: widget.borderRadius ?? BorderRadius.circular(8),
-                          borderSide: BorderSide(color: widget.borderColor, width: widget.borderWidth),
+                          borderRadius:
+                              widget.borderRadius ?? BorderRadius.circular(8),
+                          borderSide: BorderSide(
+                              color: widget.borderColor,
+                              width: widget.borderWidth),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderRadius: widget.borderRadius ?? BorderRadius.circular(8),
-                          borderSide: BorderSide(color: widget.borderColor, width: widget.borderWidth),
+                          borderRadius:
+                              widget.borderRadius ?? BorderRadius.circular(8),
+                          borderSide: BorderSide(
+                              color: widget.borderColor,
+                              width: widget.borderWidth),
                         ),
                         focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: widget.borderRadius ?? BorderRadius.circular(8),
-                          borderSide: BorderSide(color: widget.borderColor, width: widget.borderWidth),
+                          borderRadius:
+                              widget.borderRadius ?? BorderRadius.circular(8),
+                          borderSide: BorderSide(
+                              color: widget.borderColor,
+                              width: widget.borderWidth),
                         ),
                         errorBorder: OutlineInputBorder(
-                          borderRadius: widget.borderRadius ?? BorderRadius.circular(8),
-                          borderSide: BorderSide(color: widget.borderColor, width: widget.borderWidth),
+                          borderRadius:
+                              widget.borderRadius ?? BorderRadius.circular(8),
+                          borderSide: BorderSide(
+                              color: widget.borderColor,
+                              width: widget.borderWidth),
                         ),
-                        errorMaxLines: 1,
                         errorStyle: TextStyle(
                           color: CupertinoColors.destructiveRed,
                           fontSize: 14.0,
-                          fontFamily: widget.fontFamily,
                         ),
-                        hintText: widget.hint.isEmpty ? widget.title : widget.hint,
+                        hintText:
+                            widget.hint.isEmpty ? widget.title : widget.hint,
                         hintStyle: TextStyle(
                           color: Colors.grey,
                           fontWeight: FontWeight.normal,

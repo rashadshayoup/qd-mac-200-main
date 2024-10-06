@@ -90,33 +90,41 @@ class _addOrderState extends State<addOrder> {
                     hint: 'ادخل رقم هاتف المستلم',
                     margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                     controller: recipientPhoneNo,
+                    onValidate: (v) {
+                      RegExp regex = RegExp(r'^09\d{8}$');
+                      if (!regex.hasMatch(v ?? '')) {
+                        return 'يجب أن يتكون رقم الهاتف من 10 أرقام ويبدأ بـ09';
+                      }
+                      return null;
+                    },
                   ),
                   AppTextField(
                     title: 'السعر',
                     hint: 'ادخل السعر',
                     margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                     controller: orderPrice,
+                    required: true,
                   ),
                   AppTextField(
                     title: 'عدد القطع',
                     hint: 'ادخل عدد القطع',
                     margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                     controller: countOfItems,
+                    required: true,
                   ),
                   AppTextField(
                     title: 'الوصف',
                     hint: 'ادخل الوصف',
                     margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                     controller: descriptionController,
+                    required: true,
                   ),
                   AppButton(
-
                       text: 'اضافة طلب',
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
                           add();
                         }
-
                       })
                 ])),
               ),
@@ -231,7 +239,6 @@ class _addOrderState extends State<addOrder> {
             ),
           ),
         );
-
       Navigator.pop(context);
     }
   }

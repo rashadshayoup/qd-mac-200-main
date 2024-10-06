@@ -33,6 +33,8 @@ OrderModel _$OrderModelFromJson(Map<String, dynamic> json) => OrderModel(
           ? null
           : Representative.fromJson(
               json['representative'] as Map<String, dynamic>),
+      json['createdAt'] as String? ?? '',
+      json['updatedAt'] as String? ?? '',
     );
 
 Map<String, dynamic> _$OrderModelToJson(OrderModel instance) =>
@@ -44,6 +46,8 @@ Map<String, dynamic> _$OrderModelToJson(OrderModel instance) =>
       'recipientAddress': instance.recipientAddress,
       'countOfItems': instance.countOfItems,
       'senderPhoneNo': instance.senderPhoneNo,
+      'createdAt': instance.createdAt,
+      'updatedAt': instance.updatedAt,
       'recipientPhoneNo': instance.recipientPhoneNo,
       'price': instance.price,
       'orderPrice': instance.orderPrice,

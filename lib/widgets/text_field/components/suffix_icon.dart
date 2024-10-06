@@ -24,6 +24,7 @@ class _SuffixIcon extends StatelessWidget {
             onTap: onTouch,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 2),
+              child: icon,
             ),
           )
         : icon;

@@ -127,163 +127,161 @@ class _orderState extends State<OrderRepresentative> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text(
-                    'رقم الطلب : ${order.orderNo}',
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.cairo(
-                      textStyle: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: _color == true
-                              ? Themes.dark_white
-                              : Themes.light_grey),
-                    ),
-                  ),
-                  SizedBox(height: 2),
-                  Text(
-                    'الملاحظة',
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.cairo(
-                      textStyle: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: _color == true
-                              ? Themes.dark_white
-                              : Themes.light_grey),
-                    ),
-                  ),
-                  Container(
-                    width: 160,
-                    child: Text(
-                      order.description,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.cairo(
-                        textStyle: TextStyle(
-                            fontSize: 12,
-                            color: _color == true
-                                ? Themes.dark_white
-                                : Colors.black),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: _width / 4,
-                    child: Text(
-                      'سعر الطلبية: ${order.orderPrice}',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: 14,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: _width / 4,
-                    child: Text(
-                      'رقم المستلم',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: 14,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Column(children: [
-                    Container(
-                      width: _width / 4,
-                      child: Text(
-                        order.recipientPhoneNo,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: _color == true
-                                ? Themes.dark_white
-                                : Themes.light.primaryColor),
-                      ),
-                    ),
-                  ]),
-                ]),
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Row(children: [
-                    Text(
-                      order.price.toString(),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: _color == true
-                              ? Themes.dark_white
-                              : Themes.light.primaryColor),
-                    ),
-                    Text(
-                      " د.ل ",
-                      style: GoogleFonts.cairo(
-                          textStyle: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                              color: Themes.light_grey)),
-                    ),
-                  ]),
-                  Container(
-                    width: 100,
-                    child: Text(
-                      'المدينة',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.cairo(
-                          textStyle: TextStyle(
-                              color: Themes.light_grey,
-                              fontWeight: FontWeight.bold)),
-                    ),
-                  ),
-                  Container(
-                    width: 100,
-                    child: Text(
-                      order.recipientAddress,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.cairo(
-                          textStyle: TextStyle(
-                              color: Themes.light_grey,
-                              fontWeight: FontWeight.bold)),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  Container(
-                    width: 100,
-                    child: Text(
-                      'حالة الطلبية',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.cairo(
-                          textStyle: TextStyle(
-                              color: Themes.light_grey,
-                              fontWeight: FontWeight.bold)),
-                    ),
-                  ),
-                  Container(
-                    width: 100,
-                    child: Text(
-                      order.orderState.toOrderState.orderStatusName,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.cairo(
-                          textStyle: TextStyle(
-                              color: Themes.light_grey,
-                              fontWeight: FontWeight.bold)),
-                    ),
-                  ),
-                ]),
+                Expanded(
+                  flex: 2,
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('رقم الطلب : ${order.orderNo}',
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.cairo(
+                                textStyle: TextStyle(
+                                    color: Themes.light_grey,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold))),
+                        SizedBox(height: 4),
+                        Text('تاريخ إلإنشاء:\n ${order.createdAt}',
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.cairo(
+                                textStyle: TextStyle(
+                                    color: Themes.light_grey,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold))),
+                        SizedBox(height: 4),
+                        Text('تاريخ آخر تعديل:\n ${order.updatedAt}',
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.cairo(
+                                textStyle: TextStyle(
+                                    color: Themes.light_grey,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold))),
+                        SizedBox(height: 5),
+                        Text(
+                          'الملاحظة',
+                          overflow: TextOverflow.ellipsis,
+                          style: GoogleFonts.cairo(
+                              textStyle: TextStyle(
+                                  color: Themes.light_grey,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold)),
+                        ),
+                        Container(
+                          child: Text(order.description,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: GoogleFonts.cairo(
+                                  textStyle: TextStyle(
+                                      color: Themes.light_grey,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold))),
+                        ),
+                        SizedBox(height: 5),
+                        Container(
+                          child: Text(
+                            'سعر الطلبية: ${order.orderPrice}',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 5),
+
+                        Container(
+                          child: Text('رقم المستلم: ${order.recipientPhoneNo}',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: GoogleFonts.cairo(
+                                  textStyle: TextStyle(
+                                      color: Themes.light_grey,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold))),
+                        ),
+
+                      ]),
+                ),
+                Expanded(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(children: [
+                          Text(
+                            order.price.toString(),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: _color == true
+                                    ? Themes.dark_white
+                                    : Themes.light.primaryColor),
+                          ),
+                          Text(
+                            " د.ل ",
+                            style: GoogleFonts.cairo(
+                                textStyle: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                    color: Themes.light_grey)),
+                          ),
+                        ]),
+                        Container(
+                          width: 100,
+                          child: Text(
+                            'المدينة',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.cairo(
+                                textStyle: TextStyle(
+                                    color: Themes.light_grey,
+                                    fontWeight: FontWeight.bold)),
+                          ),
+                        ),
+                        Container(
+                          width: 100,
+                          child: Text(
+                            order.recipientAddress,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.cairo(
+                                textStyle: TextStyle(
+                                    color: Themes.light_grey,
+                                    fontWeight: FontWeight.bold)),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        Container(
+                          width: 100,
+                          child: Text(
+                            'حالة الطلبية',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.cairo(
+                                textStyle: TextStyle(
+                                    color: Themes.light_grey,
+                                    fontWeight: FontWeight.bold)),
+                          ),
+                        ),
+                        Container(
+                          width: 100,
+                          child: Text(
+                            order.orderState.toOrderState.orderStatusName,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.cairo(
+                                textStyle: TextStyle(
+                                    color: Themes.light_grey,
+                                    fontWeight: FontWeight.bold)),
+                          ),
+                        ),
+                      ]),
+                ),
               ],
             ),
             SizedBox(

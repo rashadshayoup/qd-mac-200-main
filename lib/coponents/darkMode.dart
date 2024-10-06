@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 const Color _kprimaryColor = Color(0xFF54a0ff);
 // const Color _kprimaryColor = Color(0xFF801b49);
@@ -28,6 +29,7 @@ class Themes {
       textTheme: TextTheme(titleMedium: TextStyle(color: _kprimaryColor)),
       primaryColor: _kprimaryColor,
       brightness: Brightness.light,
+      fontFamily: GoogleFonts.cairo().fontFamily,
       scaffoldBackgroundColor: Colors.grey[350]);
   static final dark = ThemeData(
     primaryColor: Colors.red,

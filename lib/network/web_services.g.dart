@@ -14,7 +14,7 @@ class _WebServices implements WebServices {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'http://10.0.2.2:5108/';
+    baseUrl ??= 'https://www.delivery-cb.justhost.ly/';
   }
 
   final Dio _dio;
@@ -221,6 +221,32 @@ class _WebServices implements WebServices {
   }
 
   @override
+  Future<void> changePassword({required ChangePasswordRequest request}) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson());
+    final _options = _setStreamType<void>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'api/UserManagement/ChangePassword',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    await _dio.fetch<void>(_options);
+  }
+
+  @override
   Future<void> changeOrderState(
       {required ChangeStateRequestRequest request}) async {
     final _extra = <String, dynamic>{};
@@ -310,3 +336,5 @@ class _WebServices implements WebServices {
     return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }
+
+
