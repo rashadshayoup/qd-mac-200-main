@@ -9,7 +9,6 @@ import 'package:pro_delivery/pages/Delivery_Prices.dart';
 import 'package:pro_delivery/pages/Movements.dart';
 import 'package:pro_delivery/pages/Order.dart';
 import 'package:pro_delivery/pages/OrderSuppliers.dart';
-import 'package:pro_delivery/pages/Search.dart';
 import 'package:pro_delivery/pages/Setting.dart';
 import 'package:pro_delivery/pages/Suppliers/TabsSuppliers.dart';
 import 'package:pro_delivery/pages/TabsOrder.dart';

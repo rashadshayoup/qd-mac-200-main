@@ -81,7 +81,7 @@ class _createAccountState extends State<createAccount> {
                     onValidate: (v) {
                       RegExp regex = RegExp(r'^09\d{8}$');
                       if (!regex.hasMatch(v ?? '')) {
-                        return 'يجب أن يتكون رقم الهاتف من 10 أرقام ويبدأ بـ09';
+                        return 'يرجى إدخال رقم الهاتف بصيغة صحيحة (09xxxxxxxx)';
                       }
                       return null;
                     },

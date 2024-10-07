@@ -57,15 +57,14 @@ class _orderState extends State<order> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             loading
-                ? Visibility(
-                    child: Container(
+                ? Container(
                     // margin: EdgeInsets.only(top: 25),
                     child: Center(
                         child: CircularProgressIndicator(
                       valueColor: AlwaysStoppedAnimation<Color>(
                           Themes.light.primaryColor),
                     )),
-                  ))
+                  )
                 : _getOrders.isEmpty
                     ? Center(
                         child: Column(

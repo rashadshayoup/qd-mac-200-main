@@ -13,7 +13,6 @@ import 'package:pro_delivery/pages/Branches.dart';
 import 'package:pro_delivery/pages/Delivery_Prices.dart';
 import 'package:pro_delivery/pages/Details_Movements.dart';
 import 'package:pro_delivery/pages/Order.dart';
-import 'package:pro_delivery/pages/Search.dart';
 import 'package:pro_delivery/pages/Setting.dart';
 import 'package:pro_delivery/pages/SupplierRequest.dart';
 import 'package:pro_delivery/pages/TabsOrder.dart';
